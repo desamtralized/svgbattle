@@ -156,7 +156,7 @@
         /* Each comparison card */
         .comparison-card {
             display: grid;
-            grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+            grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
             gap: 0;
             background: var(--charcoal);
             border: 1px solid var(--slate);
@@ -402,6 +402,39 @@
             filter: drop-shadow(0 0 18px rgba(108, 92, 231, 0.45));
         }
 
+        /* Opus 4.7 Max side */
+        .svg-opus-max {
+            padding: 60px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--slate);
+            position: relative;
+        }
+
+        .svg-opus-max::before {
+            content: 'Opus 4.7 Max';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: #D97757;
+            text-transform: uppercase;
+        }
+
+        .svg-opus-max .svg-container {
+            transition: transform 0.4s ease;
+        }
+
+        .comparison-card:hover .svg-opus-max .svg-container {
+            transform: scale(1.08);
+            filter: drop-shadow(0 0 18px rgba(217, 119, 87, 0.5));
+        }
+
         .svg-opus-plus .svg-container {
             transition: transform 0.4s ease;
         }
@@ -468,7 +501,7 @@
         @media (max-width: 900px) {
             .comparison-card {
                 grid-template-columns: 1fr;
-                grid-template-rows: auto auto auto auto auto auto auto auto auto;
+                grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto;
             }
 
             .divider {
@@ -501,6 +534,13 @@
             }
 
             .svg-composer::before {
+                top: 15px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .svg-opus-max::before {
                 top: 15px;
                 right: auto;
                 left: 50%;
@@ -550,7 +590,7 @@
         </svg>
         <h1>SVG Gallery</h1>
         <h1>SVG Gallery</h1>
-        <p class="subtitle">Opus 4.5 vs. Gemini 3 Pro vs. Gemini 3 Flash vs. Composer 2.5 Fast Max</p>
+        <p class="subtitle">Opus 4.5 vs. Gemini 3 Pro vs. Gemini 3 Flash vs. Composer 2.5 Fast Max vs. Opus 4.7 Max</p>
     </header>
 
     <main class="gallery">
@@ -779,6 +819,104 @@
                     </svg>
                 </div>
             </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-max">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="opusMaxMonsteraBg" cx="50%" cy="40%" r="60%">
+                                <stop offset="0%" stop-color="#3A2A24" />
+                                <stop offset="100%" stop-color="#1A1A1A" />
+                            </radialGradient>
+                            <linearGradient id="opusMaxMonsteraPot" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#E6A788" />
+                                <stop offset="50%" stop-color="#D97757" />
+                                <stop offset="100%" stop-color="#8B4D3B" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxLeafA" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#5C8F4A" />
+                                <stop offset="55%" stop-color="#2F5F2E" />
+                                <stop offset="100%" stop-color="#143A16" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxLeafB" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#7BB46C" />
+                                <stop offset="60%" stop-color="#3D7A38" />
+                                <stop offset="100%" stop-color="#1F4A22" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxLeafC" x1="100%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#A8C97A" />
+                                <stop offset="100%" stop-color="#2F5F2E" />
+                            </linearGradient>
+                            <filter id="opusMaxMonsteraShadow">
+                                <feDropShadow dx="1" dy="3" stdDeviation="2.5" flood-color="#000" flood-opacity="0.55" />
+                            </filter>
+                        </defs>
+                        <!-- Subtle backdrop disc -->
+                        <circle cx="50" cy="50" r="46" fill="url(#opusMaxMonsteraBg)" opacity="0.35" />
+                        <!-- Sun halo behind plant -->
+                        <circle cx="50" cy="40" r="22" fill="#D97757" opacity="0.08" />
+                        <!-- Pot with art deco rings -->
+                        <path d="M30 92 L34 74 L66 74 L70 92 Z" fill="url(#opusMaxMonsteraPot)" />
+                        <ellipse cx="50" cy="74" rx="16" ry="3.5" fill="#F2D5C4" />
+                        <ellipse cx="50" cy="74" rx="13" ry="2.5" fill="#5D3A2E" />
+                        <ellipse cx="50" cy="74" rx="11" ry="1.8" fill="#2E1A12" />
+                        <!-- Pot decorative bands -->
+                        <path d="M32.5 80 L67.5 80" stroke="#F2D5C4" stroke-width="0.6" opacity="0.7" />
+                        <path d="M31.2 85 L68.8 85" stroke="#F2D5C4" stroke-width="0.6" opacity="0.7" />
+                        <!-- Art deco chevron on pot -->
+                        <path d="M44 88 L50 84 L56 88" stroke="#8B4D3B" stroke-width="0.8" fill="none" />
+                        <path d="M46 90 L50 87 L54 90" stroke="#8B4D3B" stroke-width="0.6" fill="none" opacity="0.7" />
+                        <!-- Stems -->
+                        <path d="M50 74 Q47 60 49 46" stroke="#2F5F2E" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                        <path d="M50 70 Q40 55 28 40" stroke="#3D7A38" stroke-width="2.2" fill="none" stroke-linecap="round" />
+                        <path d="M50 66 Q60 50 72 36" stroke="#3D7A38" stroke-width="2" fill="none" stroke-linecap="round" />
+                        <path d="M50 72 Q55 62 60 54" stroke="#5C8F4A" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                        <g filter="url(#opusMaxMonsteraShadow)">
+                            <!-- Left split leaf -->
+                            <path d="M28 40 Q6 30 4 8 Q14 14 22 4 Q26 18 28 40 Z" fill="url(#opusMaxLeafA)" />
+                            <!-- Fenestrations (splits) -->
+                            <path d="M16 18 Q20 14 22 8" stroke="#143A16" stroke-width="1" fill="none" opacity="0.6" />
+                            <ellipse cx="14" cy="20" rx="2.2" ry="3.2" fill="#1A1A1A" opacity="0.75" transform="rotate(-25 14 20)" />
+                            <ellipse cx="20" cy="14" rx="1.6" ry="2.4" fill="#1A1A1A" opacity="0.75" transform="rotate(-15 20 14)" />
+                            <path d="M10 22 Q14 18 18 22" stroke="#0F2F12" stroke-width="0.6" fill="none" />
+                            <path d="M22 8 Q24 22 28 38" stroke="#0F2F12" stroke-width="0.6" fill="none" />
+
+                            <!-- Center large leaf -->
+                            <path d="M49 46 Q26 32 18 10 Q34 22 50 8 Q66 22 82 10 Q74 32 51 46 Z" fill="url(#opusMaxLeafB)" />
+                            <!-- Central vein -->
+                            <path d="M50 44 L50 12" stroke="#143A16" stroke-width="0.7" opacity="0.7" />
+                            <!-- Splits -->
+                            <ellipse cx="38" cy="24" rx="2.4" ry="3.4" fill="#1A1A1A" opacity="0.8" transform="rotate(-20 38 24)" />
+                            <ellipse cx="62" cy="24" rx="2.4" ry="3.4" fill="#1A1A1A" opacity="0.8" transform="rotate(20 62 24)" />
+                            <ellipse cx="44" cy="36" rx="1.8" ry="2.6" fill="#1A1A1A" opacity="0.75" transform="rotate(-30 44 36)" />
+                            <ellipse cx="56" cy="36" rx="1.8" ry="2.6" fill="#1A1A1A" opacity="0.75" transform="rotate(30 56 36)" />
+                            <ellipse cx="50" cy="18" rx="1.6" ry="2.4" fill="#1A1A1A" opacity="0.75" />
+                            <!-- Lateral veins -->
+                            <path d="M50 20 Q40 26 36 30" stroke="#0F2F12" stroke-width="0.5" fill="none" />
+                            <path d="M50 20 Q60 26 64 30" stroke="#0F2F12" stroke-width="0.5" fill="none" />
+                            <path d="M50 30 Q42 36 38 40" stroke="#0F2F12" stroke-width="0.5" fill="none" />
+                            <path d="M50 30 Q58 36 62 40" stroke="#0F2F12" stroke-width="0.5" fill="none" />
+
+                            <!-- Right leaf -->
+                            <path d="M72 36 Q92 24 96 4 Q86 14 80 4 Q78 20 72 36 Z" fill="url(#opusMaxLeafC)" />
+                            <ellipse cx="84" cy="12" rx="2.2" ry="3.2" fill="#1A1A1A" opacity="0.75" transform="rotate(20 84 12)" />
+                            <ellipse cx="78" cy="18" rx="1.6" ry="2.4" fill="#1A1A1A" opacity="0.7" transform="rotate(30 78 18)" />
+                            <path d="M80 6 Q76 20 72 34" stroke="#0F2F12" stroke-width="0.6" fill="none" />
+
+                            <!-- Small accent leaf -->
+                            <path d="M60 54 Q74 48 82 40 Q74 46 70 40 Q68 50 60 54 Z" fill="#4A8742" />
+                            <path d="M62 52 Q70 48 78 42" stroke="#143A16" stroke-width="0.5" fill="none" />
+                        </g>
+                        <!-- Coral berry / flower accent -->
+                        <circle cx="46" cy="56" r="1.8" fill="#D97757" />
+                        <circle cx="46" cy="56" r="0.8" fill="#F2D5C4" />
+                        <!-- Pot signature dot -->
+                        <circle cx="50" cy="78" r="1.5" fill="#F2D5C4" opacity="0.6" />
+                    </svg>
+                </div>
+            </div>
         </article>
 
         <!-- Airplane -->
@@ -993,6 +1131,114 @@
                             <ellipse cx="0" cy="8" rx="3" ry="5" fill="#2D2D2D" transform="rotate(30)" />
                         </g>
                         <path d="M8 58 L28 50 M6 64 L24 58" stroke="#6C5CE7" stroke-width="1.5" opacity="0.5" stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-max">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="opusMaxSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#3D2418" />
+                                <stop offset="40%" stop-color="#8B4D3B" />
+                                <stop offset="75%" stop-color="#D97757" />
+                                <stop offset="100%" stop-color="#F2D5C4" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxFuselage" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#F8E6D8" />
+                                <stop offset="35%" stop-color="#E6A788" />
+                                <stop offset="100%" stop-color="#8B4D3B" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxWing" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#E6A788" />
+                                <stop offset="100%" stop-color="#8B4D3B" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxCockpit" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#3D2418" />
+                                <stop offset="100%" stop-color="#1A1A1A" />
+                            </linearGradient>
+                            <radialGradient id="opusMaxSun" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFEAD5" />
+                                <stop offset="60%" stop-color="#D97757" />
+                                <stop offset="100%" stop-color="#D97757" stop-opacity="0" />
+                            </radialGradient>
+                            <filter id="opusMaxPlaneShadow">
+                                <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#000" flood-opacity="0.35" />
+                            </filter>
+                            <filter id="opusMaxPropBlur">
+                                <feGaussianBlur stdDeviation="0.8" />
+                            </filter>
+                        </defs>
+                        <!-- Sunset sky -->
+                        <rect width="100" height="100" fill="url(#opusMaxSky)" rx="4" />
+                        <!-- Setting sun -->
+                        <circle cx="22" cy="62" r="14" fill="url(#opusMaxSun)" />
+                        <circle cx="22" cy="62" r="6" fill="#FFEAD5" opacity="0.9" />
+                        <!-- Distant cloud bands -->
+                        <path d="M0 72 Q20 68 40 72 T80 72 T100 70" stroke="#8B4D3B" stroke-width="1.5" fill="none" opacity="0.5" />
+                        <path d="M0 80 Q25 76 50 80 T100 78" stroke="#3D2418" stroke-width="2" fill="none" opacity="0.6" />
+                        <!-- Contrails -->
+                        <path d="M68 42 Q50 44 30 50" stroke="#F8E6D8" stroke-width="1.4" fill="none" opacity="0.55" stroke-linecap="round" />
+                        <path d="M70 46 Q52 50 32 56" stroke="#F8E6D8" stroke-width="1" fill="none" opacity="0.4" stroke-linecap="round" />
+                        <!-- Art deco golden-age plane, banking right -->
+                        <g filter="url(#opusMaxPlaneShadow)" transform="translate(50 48) rotate(-10)">
+                            <!-- Lower wing (further) -->
+                            <path d="M-20 6 L18 6 L22 9 L-16 9 Z" fill="#8B4D3B" opacity="0.85" />
+                            <path d="M-20 6 L18 6" stroke="#3D2418" stroke-width="0.4" />
+                            <!-- Tail fin -->
+                            <path d="M-28 -2 L-36 -12 L-22 -4 Z" fill="url(#opusMaxWing)" />
+                            <path d="M-30 -2 L-38 0 L-22 2 Z" fill="#8B4D3B" />
+                            <!-- Fuselage -->
+                            <path d="M-32 0 Q-22 -8 6 -8 L26 -5 Q36 0 26 5 L6 8 Q-22 8 -32 0 Z" fill="url(#opusMaxFuselage)" />
+                            <!-- Belly shadow -->
+                            <path d="M-30 2 Q-20 8 6 8 L26 5" stroke="#8B4D3B" stroke-width="0.5" fill="none" opacity="0.6" />
+                            <!-- Art deco fuselage stripes -->
+                            <rect x="-22" y="-1" width="40" height="0.8" fill="#3D2418" />
+                            <rect x="-22" y="1" width="40" height="0.4" fill="#F8E6D8" />
+                            <!-- Rivets along fuselage -->
+                            <g fill="#3D2418" opacity="0.6">
+                                <circle cx="-20" cy="-3" r="0.4" />
+                                <circle cx="-12" cy="-3" r="0.4" />
+                                <circle cx="-4" cy="-3" r="0.4" />
+                                <circle cx="4" cy="-3" r="0.4" />
+                                <circle cx="12" cy="-3" r="0.4" />
+                                <circle cx="20" cy="-3" r="0.4" />
+                            </g>
+                            <!-- Upper wing (closer) -->
+                            <path d="M-18 -3 L20 -16 L26 -13 L-12 -1 Z" fill="url(#opusMaxWing)" />
+                            <!-- Wing struts -->
+                            <path d="M-12 -1 L-14 6" stroke="#3D2418" stroke-width="0.6" />
+                            <path d="M12 -9 L14 6" stroke="#3D2418" stroke-width="0.6" />
+                            <!-- Wing detail -->
+                            <path d="M-8 -7 L22 -16" stroke="#F8E6D8" stroke-width="0.5" opacity="0.7" />
+                            <!-- Cockpit canopy -->
+                            <path d="M0 -4 Q4 -8 12 -7 L16 -5 Q18 -3 16 -2 L4 -2 Q-1 -2 0 -4 Z" fill="url(#opusMaxCockpit)" />
+                            <path d="M2 -5 Q6 -7 12 -6" stroke="#D97757" stroke-width="0.4" fill="none" opacity="0.8" />
+                            <!-- Pilot silhouette -->
+                            <circle cx="8" cy="-4" r="1.2" fill="#1A1A1A" />
+                            <!-- Engine cowling -->
+                            <ellipse cx="28" cy="0" rx="5" ry="6" fill="#3D2418" />
+                            <ellipse cx="28" cy="0" rx="4" ry="5" fill="#1A1A1A" />
+                            <!-- Propeller hub -->
+                            <circle cx="32" cy="0" r="1.6" fill="#E6A788" />
+                            <!-- Spinning propeller (blurred) -->
+                            <g filter="url(#opusMaxPropBlur)">
+                                <ellipse cx="32" cy="0" rx="1" ry="9" fill="#F8E6D8" opacity="0.35" />
+                                <ellipse cx="32" cy="0" rx="0.6" ry="9" fill="#FFEAD5" opacity="0.65" />
+                            </g>
+                            <!-- Coral roundel insignia -->
+                            <circle cx="-2" cy="4" r="3" fill="#F8E6D8" />
+                            <circle cx="-2" cy="4" r="2" fill="#D97757" />
+                            <circle cx="-2" cy="4" r="0.9" fill="#3D2418" />
+                            <!-- Tail flash -->
+                            <rect x="-32" y="-3" width="6" height="6" fill="#D97757" />
+                            <rect x="-32" y="-1" width="6" height="2" fill="#F8E6D8" />
+                        </g>
+                        <!-- Foreground silhouette mountain -->
+                        <path d="M0 95 L18 82 L34 90 L52 78 L70 88 L100 76 L100 100 L0 100 Z" fill="#1A1A1A" opacity="0.85" />
                     </svg>
                 </div>
             </div>
@@ -1232,6 +1478,135 @@
                     </svg>
                 </div>
             </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-max">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="opusMaxBusBody" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#E6A788" />
+                                <stop offset="55%" stop-color="#D97757" />
+                                <stop offset="100%" stop-color="#8B4D3B" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxBusCream" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FAF1E4" />
+                                <stop offset="100%" stop-color="#E8D8C2" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxBusWindow" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FFEAD5" />
+                                <stop offset="50%" stop-color="#5C3A2E" />
+                                <stop offset="100%" stop-color="#1A1A1A" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxChrome" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#F8E6D8" />
+                                <stop offset="50%" stop-color="#C9A98E" />
+                                <stop offset="100%" stop-color="#8B6B52" />
+                            </linearGradient>
+                            <filter id="opusMaxBusShadow">
+                                <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000" flood-opacity="0.5" />
+                            </filter>
+                            <filter id="opusMaxHeadlightGlow">
+                                <feGaussianBlur stdDeviation="1" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <!-- Ground reflection -->
+                        <ellipse cx="50" cy="92" rx="44" ry="3" fill="#000" opacity="0.5" />
+                        <g filter="url(#opusMaxBusShadow)">
+                            <!-- Streamliner body main shell -->
+                            <path d="M6 70 Q6 30 18 26 L82 26 Q94 30 94 70 L94 80 Q94 84 90 84 L10 84 Q6 84 6 80 Z"
+                                fill="url(#opusMaxBusBody)" />
+                            <!-- Cream center band -->
+                            <path d="M6 50 Q6 46 10 46 L90 46 Q94 46 94 50 L94 62 L6 62 Z"
+                                fill="url(#opusMaxBusCream)" />
+                            <!-- Chrome strip top -->
+                            <rect x="6" y="44" width="88" height="1.2" fill="url(#opusMaxChrome)" />
+                            <rect x="6" y="62.5" width="88" height="1.2" fill="url(#opusMaxChrome)" />
+                            <!-- Slim coral stripe in cream band -->
+                            <rect x="6" y="55" width="88" height="0.8" fill="#D97757" opacity="0.85" />
+                            <!-- Front curved windshield -->
+                            <path d="M68 30 Q88 32 90 42 L72 42 Z" fill="url(#opusMaxBusWindow)" opacity="0.95" />
+                            <path d="M68 30 Q88 32 90 42" stroke="url(#opusMaxChrome)" stroke-width="0.6" fill="none" />
+                            <!-- Side windows (5 streamlined) -->
+                            <g>
+                                <path d="M16 32 Q16 30 18 30 L28 30 Q30 30 30 32 L30 42 L16 42 Z" fill="url(#opusMaxBusWindow)" />
+                                <path d="M32 30 L46 30 L46 42 L32 42 Z" fill="url(#opusMaxBusWindow)" />
+                                <path d="M48 30 L62 30 L62 42 L48 42 Z" fill="url(#opusMaxBusWindow)" />
+                                <path d="M64 30 L66 30 L66 42 L64 42 Z" fill="url(#opusMaxBusWindow)" />
+                            </g>
+                            <!-- Window frames chrome -->
+                            <path d="M14 42 L66 42" stroke="url(#opusMaxChrome)" stroke-width="0.5" />
+                            <path d="M30 30 L30 42 M46 30 L46 42 M62 30 L62 42" stroke="#3D2418" stroke-width="0.4" />
+                            <!-- Window reflections -->
+                            <path d="M18 31 L20 31 L20 41" stroke="#F8E6D8" stroke-width="0.4" fill="none" opacity="0.5" />
+                            <path d="M34 31 L36 31 L36 41" stroke="#F8E6D8" stroke-width="0.4" fill="none" opacity="0.5" />
+                            <path d="M50 31 L52 31 L52 41" stroke="#F8E6D8" stroke-width="0.4" fill="none" opacity="0.5" />
+                            <!-- Door (front side) -->
+                            <path d="M12 50 L12 72 L18 72 L18 50 Z" fill="#3D2418" />
+                            <rect x="13" y="52" width="4" height="8" fill="url(#opusMaxBusWindow)" />
+                            <rect x="13" y="63" width="4" height="8" fill="url(#opusMaxBusWindow)" />
+                            <circle cx="17" cy="61" r="0.6" fill="#F8E6D8" />
+                            <!-- Destination roller -->
+                            <rect x="20" y="27" width="36" height="3" fill="#1A1A1A" />
+                            <text x="38" y="29.5" font-family="sans-serif" font-size="2.2" font-weight="bold" fill="#FFEAD5" text-anchor="middle" letter-spacing="0.5">SUNSET LIMITED</text>
+                            <!-- Route number plate -->
+                            <rect x="74" y="32" width="10" height="8" fill="#FAF1E4" />
+                            <text x="79" y="38.5" font-family="sans-serif" font-size="5.5" font-weight="bold" fill="#D97757" text-anchor="middle">47</text>
+                            <!-- Air vents on lower body -->
+                            <g fill="#3D2418" opacity="0.5">
+                                <rect x="22" y="68" width="14" height="0.8" />
+                                <rect x="22" y="70" width="14" height="0.8" />
+                                <rect x="22" y="72" width="14" height="0.8" />
+                                <rect x="58" y="68" width="14" height="0.8" />
+                                <rect x="58" y="70" width="14" height="0.8" />
+                                <rect x="58" y="72" width="14" height="0.8" />
+                            </g>
+                            <!-- Anthropic-style stylized logo medallion -->
+                            <circle cx="44" cy="71" r="3.5" fill="#1A1A1A" />
+                            <circle cx="44" cy="71" r="2.6" fill="#D97757" />
+                            <path d="M44 69 L42.5 73 L43.5 73 L43.8 72.2 L44.2 72.2 L44.5 73 L45.5 73 Z" fill="#1A1A1A" />
+                            <!-- Headlight pod (front right) -->
+                            <ellipse cx="91" cy="55" rx="3" ry="2.5" fill="url(#opusMaxChrome)" />
+                            <circle cx="91" cy="55" r="1.8" fill="#FFEAD5" filter="url(#opusMaxHeadlightGlow)" />
+                            <!-- Front grille bars -->
+                            <g stroke="url(#opusMaxChrome)" stroke-width="0.5" fill="none">
+                                <path d="M86 64 L94 64" />
+                                <path d="M86 66 L94 66" />
+                                <path d="M86 68 L94 68" />
+                            </g>
+                            <!-- Rear light -->
+                            <rect x="7" y="58" width="3" height="6" rx="1" fill="#8B2635" />
+                            <rect x="7" y="59" width="3" height="2" fill="#FF5252" />
+                            <!-- Wheel wells (cutouts) -->
+                            <path d="M14 84 Q14 72 26 72 Q38 72 38 84 Z" fill="#1A1A1A" />
+                            <path d="M62 84 Q62 72 74 72 Q86 72 86 84 Z" fill="#1A1A1A" />
+                            <!-- Wheels with detail -->
+                            <circle cx="26" cy="82" r="8" fill="#0D0D0D" />
+                            <circle cx="26" cy="82" r="6" fill="#2D2D2D" />
+                            <circle cx="26" cy="82" r="4" fill="url(#opusMaxChrome)" />
+                            <circle cx="26" cy="82" r="1.5" fill="#3D2418" />
+                            <g stroke="#3D2418" stroke-width="0.5">
+                                <path d="M26 78 L26 86 M22 82 L30 82 M23.5 79.5 L28.5 84.5 M28.5 79.5 L23.5 84.5" />
+                            </g>
+                            <circle cx="74" cy="82" r="8" fill="#0D0D0D" />
+                            <circle cx="74" cy="82" r="6" fill="#2D2D2D" />
+                            <circle cx="74" cy="82" r="4" fill="url(#opusMaxChrome)" />
+                            <circle cx="74" cy="82" r="1.5" fill="#3D2418" />
+                            <g stroke="#3D2418" stroke-width="0.5">
+                                <path d="M74 78 L74 86 M70 82 L78 82 M71.5 79.5 L76.5 84.5 M76.5 79.5 L71.5 84.5" />
+                            </g>
+                            <!-- Chrome side mirror -->
+                            <path d="M64 30 L67 22 L69 22 L66 30" fill="url(#opusMaxChrome)" />
+                            <circle cx="68" cy="23" r="1.2" fill="#1A1A1A" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
         </article>
 
         <!-- Car -->
@@ -1465,6 +1840,144 @@
                         <circle cx="76" cy="72" r="3" fill="#C9A227" />
                         <path d="M18 58 L86 54" stroke="#A29BFE" stroke-width="1" filter="url(#composerCarGlow)" />
                         <rect x="88" y="58" width="5" height="3" rx="1" fill="#FFEB3B" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-max">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="opusMaxCarBody" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#F2D5C4" />
+                                <stop offset="40%" stop-color="#D97757" />
+                                <stop offset="100%" stop-color="#5C2A1E" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxCarFender" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#8B4D3B" />
+                                <stop offset="100%" stop-color="#3D2418" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxCarChrome" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FAF1E4" />
+                                <stop offset="40%" stop-color="#E8D8C2" />
+                                <stop offset="100%" stop-color="#8B6B52" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxCarWindow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#3D2418" />
+                                <stop offset="50%" stop-color="#8B4D3B" />
+                                <stop offset="100%" stop-color="#1A1A1A" />
+                            </linearGradient>
+                            <radialGradient id="opusMaxCarHeadlight" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFEAD5" />
+                                <stop offset="60%" stop-color="#FAD9B8" />
+                                <stop offset="100%" stop-color="#D97757" />
+                            </radialGradient>
+                            <filter id="opusMaxCarShadow">
+                                <feDropShadow dx="0" dy="5" stdDeviation="3" flood-color="#000" flood-opacity="0.55" />
+                            </filter>
+                            <filter id="opusMaxCarHeadGlow">
+                                <feGaussianBlur stdDeviation="1.4" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <!-- Subtle ground shadow -->
+                        <ellipse cx="50" cy="82" rx="42" ry="3.5" fill="#000" opacity="0.55" />
+                        <g filter="url(#opusMaxCarShadow)">
+                            <!-- Rear sweeping fender -->
+                            <path d="M6 62 Q4 56 10 50 Q18 42 32 46 L34 58 L18 62 Z" fill="url(#opusMaxCarFender)" />
+                            <!-- Front sweeping fender -->
+                            <path d="M94 62 Q96 56 90 50 Q82 42 68 46 L66 58 L82 62 Z" fill="url(#opusMaxCarFender)" />
+                            <!-- Running board -->
+                            <rect x="22" y="64" width="56" height="3" fill="#3D2418" />
+                            <rect x="22" y="66.5" width="56" height="0.8" fill="url(#opusMaxCarChrome)" />
+                            <!-- Main body lower -->
+                            <path d="M14 60 Q12 50 22 46 L78 46 Q88 50 86 60 L86 70 Q86 72 84 72 L16 72 Q14 72 14 70 Z"
+                                fill="url(#opusMaxCarBody)" />
+                            <!-- Roof / cabin (low and sleek art deco coupe) -->
+                            <path d="M32 46 Q34 26 50 24 Q66 26 68 46 Z" fill="url(#opusMaxCarBody)" />
+                            <!-- Chrome belt line -->
+                            <path d="M14 60 L86 60" stroke="url(#opusMaxCarChrome)" stroke-width="1" />
+                            <!-- Body crease highlight -->
+                            <path d="M14 56 Q50 53 86 56" stroke="#F2D5C4" stroke-width="0.5" opacity="0.6" fill="none" />
+                            <!-- Cream art deco stripe -->
+                            <path d="M22 58 Q50 56 78 58" stroke="#FAF1E4" stroke-width="0.8" fill="none" opacity="0.85" />
+                            <!-- Windshield -->
+                            <path d="M34 44 Q36 30 50 28 Q56 28 60 32 L60 44 Z" fill="url(#opusMaxCarWindow)" />
+                            <!-- Rear window -->
+                            <path d="M40 44 L40 32 Q44 28 50 28 L50 44 Z" fill="url(#opusMaxCarWindow)" opacity="0.85" />
+                            <!-- Side door window -->
+                            <path d="M50 30 L66 32 L66 44 L50 44 Z" fill="url(#opusMaxCarWindow)" />
+                            <!-- Chrome window trim -->
+                            <path d="M34 44 Q36 30 50 28 Q66 30 66 44" stroke="url(#opusMaxCarChrome)" stroke-width="0.6" fill="none" />
+                            <rect x="49" y="28" width="1.2" height="16" fill="url(#opusMaxCarChrome)" />
+                            <!-- Window reflection -->
+                            <path d="M38 34 L44 32 L42 40" stroke="#F2D5C4" stroke-width="0.4" fill="none" opacity="0.7" />
+                            <path d="M54 32 L60 34 L58 40" stroke="#F2D5C4" stroke-width="0.4" fill="none" opacity="0.7" />
+                            <!-- Hood vents -->
+                            <g fill="#3D2418">
+                                <rect x="74" y="50" width="8" height="0.6" />
+                                <rect x="74" y="52" width="8" height="0.6" />
+                                <rect x="74" y="54" width="8" height="0.6" />
+                                <rect x="74" y="56" width="8" height="0.6" />
+                            </g>
+                            <!-- Side mirror -->
+                            <ellipse cx="32" cy="40" rx="1.4" ry="2" fill="#1A1A1A" />
+                            <path d="M33 41 L36 44" stroke="#3D2418" stroke-width="0.5" />
+                            <ellipse cx="68" cy="40" rx="1.4" ry="2" fill="#1A1A1A" />
+                            <path d="M67 41 L64 44" stroke="#3D2418" stroke-width="0.5" />
+                            <!-- Door handle -->
+                            <rect x="42" y="58" width="6" height="1.4" rx="0.5" fill="url(#opusMaxCarChrome)" />
+                            <rect x="52" y="58" width="6" height="1.4" rx="0.5" fill="url(#opusMaxCarChrome)" />
+                            <!-- Door seam -->
+                            <path d="M50 46 L50 64" stroke="#3D2418" stroke-width="0.4" opacity="0.6" />
+                            <!-- Front grille (art deco vertical bars) -->
+                            <path d="M86 52 L92 52 L92 64 L86 64 Z" fill="#1A1A1A" />
+                            <g stroke="url(#opusMaxCarChrome)" stroke-width="0.4">
+                                <path d="M87 52 L87 64" />
+                                <path d="M88 52 L88 64" />
+                                <path d="M89 52 L89 64" />
+                                <path d="M90 52 L90 64" />
+                                <path d="M91 52 L91 64" />
+                            </g>
+                            <!-- Hood ornament -->
+                            <path d="M82 46 L84 42 L86 46 Z" fill="url(#opusMaxCarChrome)" />
+                            <!-- Headlights (round, art deco) -->
+                            <circle cx="90" cy="50" r="3.5" fill="url(#opusMaxCarChrome)" />
+                            <circle cx="90" cy="50" r="2.5" fill="url(#opusMaxCarHeadlight)" filter="url(#opusMaxCarHeadGlow)" />
+                            <circle cx="90" cy="50" r="0.8" fill="#FFEAD5" />
+                            <!-- Tail light -->
+                            <rect x="6" y="52" width="3" height="6" rx="1" fill="#1A1A1A" />
+                            <rect x="6.5" y="53" width="2" height="4" fill="#D97757" />
+                            <!-- Wheels (spoked, art deco) -->
+                            <g>
+                                <circle cx="26" cy="68" r="11" fill="#0D0D0D" />
+                                <circle cx="26" cy="68" r="9" fill="#1A1A1A" />
+                                <circle cx="26" cy="68" r="6.5" fill="url(#opusMaxCarChrome)" />
+                                <circle cx="26" cy="68" r="5" fill="#3D2418" />
+                                <!-- Art deco spokes -->
+                                <g stroke="url(#opusMaxCarChrome)" stroke-width="0.7">
+                                    <path d="M26 63 L26 73 M21 68 L31 68" />
+                                    <path d="M22.5 64.5 L29.5 71.5 M29.5 64.5 L22.5 71.5" />
+                                </g>
+                                <circle cx="26" cy="68" r="1.4" fill="#D97757" />
+                            </g>
+                            <g>
+                                <circle cx="74" cy="68" r="11" fill="#0D0D0D" />
+                                <circle cx="74" cy="68" r="9" fill="#1A1A1A" />
+                                <circle cx="74" cy="68" r="6.5" fill="url(#opusMaxCarChrome)" />
+                                <circle cx="74" cy="68" r="5" fill="#3D2418" />
+                                <g stroke="url(#opusMaxCarChrome)" stroke-width="0.7">
+                                    <path d="M74 63 L74 73 M69 68 L79 68" />
+                                    <path d="M70.5 64.5 L77.5 71.5 M77.5 64.5 L70.5 71.5" />
+                                </g>
+                                <circle cx="74" cy="68" r="1.4" fill="#D97757" />
+                            </g>
+                        </g>
                     </svg>
                 </div>
             </div>
@@ -1732,6 +2245,201 @@
                     </svg>
                 </div>
             </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-max">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="opusMaxSkySunset" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#1A0A14" />
+                                <stop offset="40%" stop-color="#3D2418" />
+                                <stop offset="70%" stop-color="#8B4D3B" />
+                                <stop offset="100%" stop-color="#D97757" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxFacade" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#2D1A14" />
+                                <stop offset="30%" stop-color="#5C3A2E" />
+                                <stop offset="70%" stop-color="#5C3A2E" />
+                                <stop offset="100%" stop-color="#2D1A14" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxSpire" x1="0%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" stop-color="#8B4D3B" />
+                                <stop offset="50%" stop-color="#D97757" />
+                                <stop offset="100%" stop-color="#FAF1E4" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxWindowWarm" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FFEAD5" />
+                                <stop offset="100%" stop-color="#D97757" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxWindowCool" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#5C3A2E" />
+                                <stop offset="100%" stop-color="#1A1A1A" />
+                            </linearGradient>
+                            <radialGradient id="opusMaxBuildingMoon" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFEAD5" />
+                                <stop offset="100%" stop-color="#FFEAD5" stop-opacity="0" />
+                            </radialGradient>
+                            <filter id="opusMaxBuildShadow">
+                                <feDropShadow dx="3" dy="0" stdDeviation="2.5" flood-color="#000" flood-opacity="0.55" />
+                            </filter>
+                            <filter id="opusMaxWindowGlow">
+                                <feGaussianBlur stdDeviation="0.6" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <!-- Sunset sky -->
+                        <rect width="100" height="100" fill="url(#opusMaxSkySunset)" rx="4" />
+                        <!-- Sun halo behind building -->
+                        <circle cx="78" cy="68" r="22" fill="url(#opusMaxBuildingMoon)" opacity="0.6" />
+                        <circle cx="80" cy="72" r="8" fill="#FFEAD5" opacity="0.7" />
+                        <!-- Distant stars -->
+                        <g fill="#F2D5C4" opacity="0.8">
+                            <circle cx="10" cy="14" r="0.5" />
+                            <circle cx="22" cy="8" r="0.4" />
+                            <circle cx="42" cy="6" r="0.6" />
+                            <circle cx="68" cy="12" r="0.4" />
+                            <circle cx="90" cy="20" r="0.5" />
+                        </g>
+                        <!-- Far-back foreground silhouette buildings -->
+                        <rect x="2" y="74" width="14" height="26" fill="#1A0A14" opacity="0.85" />
+                        <rect x="84" y="80" width="14" height="20" fill="#1A0A14" opacity="0.85" />
+                        <g fill="#D97757" opacity="0.4">
+                            <rect x="4" y="78" width="2" height="2" />
+                            <rect x="8" y="82" width="2" height="2" />
+                            <rect x="12" y="78" width="2" height="2" />
+                            <rect x="86" y="84" width="2" height="2" />
+                            <rect x="90" y="88" width="2" height="2" />
+                            <rect x="94" y="84" width="2" height="2" />
+                        </g>
+                        <!-- Art Deco skyscraper -->
+                        <g filter="url(#opusMaxBuildShadow)">
+                            <!-- Main tower trunk -->
+                            <rect x="32" y="40" width="36" height="55" fill="url(#opusMaxFacade)" />
+                            <!-- Setback tier 1 (wider base) -->
+                            <rect x="28" y="80" width="44" height="15" fill="url(#opusMaxFacade)" />
+                            <!-- Setback tier 2 (mid) -->
+                            <rect x="36" y="30" width="28" height="11" fill="url(#opusMaxFacade)" />
+                            <!-- Crown stepped pyramid (Chrysler-style) -->
+                            <path d="M37 30 L40 24 L60 24 L63 30 Z" fill="#5C3A2E" />
+                            <path d="M40 24 L42 19 L58 19 L60 24 Z" fill="#3D2418" />
+                            <path d="M42 19 L44 14 L56 14 L58 19 Z" fill="#5C3A2E" />
+                            <!-- Crown chevron art deco arches -->
+                            <g stroke="url(#opusMaxSpire)" stroke-width="0.8" fill="none">
+                                <path d="M44 26 Q50 22 56 26" />
+                                <path d="M45 22 Q50 19 55 22" />
+                                <path d="M46 18 Q50 16 54 18" />
+                            </g>
+                            <!-- Sunburst rays in crown -->
+                            <g stroke="url(#opusMaxSpire)" stroke-width="0.5" opacity="0.9">
+                                <path d="M50 28 L46 22" />
+                                <path d="M50 28 L48 21" />
+                                <path d="M50 28 L50 20" />
+                                <path d="M50 28 L52 21" />
+                                <path d="M50 28 L54 22" />
+                            </g>
+                            <!-- Spire -->
+                            <path d="M50 14 L48 4 L52 4 Z" fill="url(#opusMaxSpire)" />
+                            <path d="M50 4 L50 -1" stroke="url(#opusMaxSpire)" stroke-width="1.5" />
+                            <circle cx="50" cy="0" r="1.2" fill="#FAF1E4" />
+                            <!-- Top finial -->
+                            <rect x="49" y="14" width="2" height="3" fill="url(#opusMaxSpire)" />
+                            <!-- Vertical Art Deco columns (gold pinstripes) -->
+                            <rect x="36" y="40" width="0.8" height="55" fill="#D97757" opacity="0.7" />
+                            <rect x="50" y="30" width="0.8" height="65" fill="#D97757" opacity="0.7" />
+                            <rect x="63" y="40" width="0.8" height="55" fill="#D97757" opacity="0.7" />
+                            <rect x="42" y="40" width="0.5" height="55" fill="#E6A788" opacity="0.5" />
+                            <rect x="58" y="40" width="0.5" height="55" fill="#E6A788" opacity="0.5" />
+                            <!-- Horizontal art deco bands -->
+                            <rect x="32" y="50" width="36" height="1.5" fill="#D97757" />
+                            <rect x="32" y="65" width="36" height="1.5" fill="#D97757" />
+                            <rect x="28" y="79" width="44" height="2" fill="#D97757" />
+                            <rect x="32" y="50" width="36" height="0.4" fill="#FAF1E4" opacity="0.6" />
+                            <rect x="32" y="65" width="36" height="0.4" fill="#FAF1E4" opacity="0.6" />
+                            <!-- Setback ornaments / eagles -->
+                            <path d="M28 80 L32 76 L32 80 Z" fill="#D97757" />
+                            <path d="M72 80 L68 76 L68 80 Z" fill="#D97757" />
+                            <path d="M36 41 L40 37 L40 41 Z" fill="#D97757" />
+                            <path d="M64 41 L60 37 L60 41 Z" fill="#D97757" />
+                            <!-- Mid tier windows (warm glow row) -->
+                            <g filter="url(#opusMaxWindowGlow)">
+                                <rect x="34" y="42" width="3.5" height="6" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="39" y="42" width="3.5" height="6" fill="url(#opusMaxWindowCool)" />
+                                <rect x="44" y="42" width="3.5" height="6" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="52" y="42" width="3.5" height="6" fill="url(#opusMaxWindowCool)" />
+                                <rect x="57" y="42" width="3.5" height="6" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="62" y="42" width="3.5" height="6" fill="url(#opusMaxWindowWarm)" />
+                                <!-- Row 2 -->
+                                <rect x="34" y="52" width="3.5" height="6" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="39" y="52" width="3.5" height="6" fill="url(#opusMaxWindowCool)" />
+                                <rect x="44" y="52" width="3.5" height="6" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="52" y="52" width="3.5" height="6" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="57" y="52" width="3.5" height="6" fill="url(#opusMaxWindowCool)" />
+                                <rect x="62" y="52" width="3.5" height="6" fill="url(#opusMaxWindowWarm)" />
+                                <!-- Row 3 -->
+                                <rect x="34" y="60" width="3.5" height="4" fill="url(#opusMaxWindowCool)" />
+                                <rect x="39" y="60" width="3.5" height="4" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="44" y="60" width="3.5" height="4" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="52" y="60" width="3.5" height="4" fill="url(#opusMaxWindowCool)" />
+                                <rect x="57" y="60" width="3.5" height="4" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="62" y="60" width="3.5" height="4" fill="url(#opusMaxWindowCool)" />
+                                <!-- Row 4 -->
+                                <rect x="34" y="67" width="3.5" height="5" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="39" y="67" width="3.5" height="5" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="44" y="67" width="3.5" height="5" fill="url(#opusMaxWindowCool)" />
+                                <rect x="52" y="67" width="3.5" height="5" fill="url(#opusMaxWindowCool)" />
+                                <rect x="57" y="67" width="3.5" height="5" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="62" y="67" width="3.5" height="5" fill="url(#opusMaxWindowWarm)" />
+                                <!-- Row 5 -->
+                                <rect x="34" y="73" width="3.5" height="5" fill="url(#opusMaxWindowCool)" />
+                                <rect x="39" y="73" width="3.5" height="5" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="44" y="73" width="3.5" height="5" fill="url(#opusMaxWindowCool)" />
+                                <rect x="52" y="73" width="3.5" height="5" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="57" y="73" width="3.5" height="5" fill="url(#opusMaxWindowCool)" />
+                                <rect x="62" y="73" width="3.5" height="5" fill="url(#opusMaxWindowWarm)" />
+                            </g>
+                            <!-- Upper-tier windows -->
+                            <g filter="url(#opusMaxWindowGlow)">
+                                <rect x="38" y="32" width="3" height="4" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="44" y="32" width="3" height="4" fill="url(#opusMaxWindowCool)" />
+                                <rect x="53" y="32" width="3" height="4" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="59" y="32" width="3" height="4" fill="url(#opusMaxWindowWarm)" />
+                            </g>
+                            <!-- Lower wider tier windows -->
+                            <g filter="url(#opusMaxWindowGlow)">
+                                <rect x="30" y="83" width="3.5" height="5" fill="url(#opusMaxWindowWarm)" />
+                                <rect x="35" y="83" width="3.5" height="5" fill="url(#opusMaxWindowCool)" />
+                                <rect x="61" y="83" width="3.5" height="5" fill="url(#opusMaxWindowCool)" />
+                                <rect x="66" y="83" width="3.5" height="5" fill="url(#opusMaxWindowWarm)" />
+                            </g>
+                            <!-- Grand art deco entrance -->
+                            <path d="M42 95 L42 82 Q46 78 50 78 Q54 78 58 82 L58 95 Z" fill="#0D0D0D" />
+                            <path d="M42 82 Q46 78 50 78 Q54 78 58 82" stroke="url(#opusMaxSpire)" stroke-width="0.8" fill="none" />
+                            <!-- Door sunburst -->
+                            <g stroke="#D97757" stroke-width="0.4" opacity="0.9">
+                                <path d="M50 82 L42 82" />
+                                <path d="M50 82 L44 79" />
+                                <path d="M50 82 L50 78" />
+                                <path d="M50 82 L56 79" />
+                                <path d="M50 82 L58 82" />
+                            </g>
+                            <!-- Door panels -->
+                            <rect x="44" y="84" width="5" height="11" fill="#1A1A1A" />
+                            <rect x="51" y="84" width="5" height="11" fill="#1A1A1A" />
+                            <circle cx="48" cy="89" r="0.5" fill="#D97757" />
+                            <circle cx="52" cy="89" r="0.5" fill="#D97757" />
+                            <!-- Warm light from entrance -->
+                            <path d="M42 95 L58 95 L62 100 L38 100 Z" fill="#FFEAD5" opacity="0.35" />
+                        </g>
+                        <!-- Foreground street -->
+                        <rect x="0" y="98" width="100" height="2" fill="#0D0D0D" />
+                    </svg>
+                </div>
+            </div>
         </article>
 
         <!-- Batman -->
@@ -1963,6 +2671,180 @@
                             <path d="M38 72 Q40 66 44 68 Q47 62 50 66 Q53 62 56 68 Q60 66 62 72 Q58 70 54 74 Q52 78 50 74 Q48 78 46 74 Q42 70 38 72" fill="#0D0D0D" />
                         </g>
                         <rect x="36" y="84" width="28" height="3" fill="#6C5CE7" rx="1" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-max">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="opusMaxBatSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#1A0A14" />
+                                <stop offset="50%" stop-color="#3D2418" />
+                                <stop offset="100%" stop-color="#D97757" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxBatCape" x1="50%" y1="0%" x2="50%" y2="100%">
+                                <stop offset="0%" stop-color="#1A0A14" />
+                                <stop offset="60%" stop-color="#0D0510" />
+                                <stop offset="100%" stop-color="#3D2418" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxBatCowl" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#2D1A20" />
+                                <stop offset="50%" stop-color="#1A0A14" />
+                                <stop offset="100%" stop-color="#0D0510" />
+                            </linearGradient>
+                            <linearGradient id="opusMaxBatSymbol" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FAF1E4" />
+                                <stop offset="40%" stop-color="#D97757" />
+                                <stop offset="100%" stop-color="#5C2A1E" />
+                            </linearGradient>
+                            <radialGradient id="opusMaxBatSignal" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFEAD5" stop-opacity="0.9" />
+                                <stop offset="40%" stop-color="#D97757" stop-opacity="0.5" />
+                                <stop offset="100%" stop-color="#D97757" stop-opacity="0" />
+                            </radialGradient>
+                            <filter id="opusMaxBatGlow">
+                                <feGaussianBlur stdDeviation="1.6" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                            <filter id="opusMaxBatShadow">
+                                <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000" flood-opacity="0.7" />
+                            </filter>
+                            <filter id="opusMaxEyeGlow">
+                                <feGaussianBlur stdDeviation="0.7" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <!-- Sunset Gotham sky -->
+                        <rect width="100" height="100" fill="url(#opusMaxBatSky)" rx="4" />
+                        <!-- Cloud bands -->
+                        <path d="M0 26 Q20 22 40 26 T80 24 T100 26" stroke="#8B4D3B" stroke-width="2" fill="none" opacity="0.55" />
+                        <path d="M0 36 Q25 34 50 36 T100 34" stroke="#5C2A1E" stroke-width="2.5" fill="none" opacity="0.5" />
+                        <!-- Bat-signal projection cone -->
+                        <ellipse cx="22" cy="28" rx="18" ry="14" fill="url(#opusMaxBatSignal)" />
+                        <!-- Bat symbol inside signal -->
+                        <g filter="url(#opusMaxBatGlow)" transform="translate(22 28) scale(0.5)">
+                            <path d="M-14 0 Q-10 -6 -6 -2 Q-3 -8 0 -3 Q3 -8 6 -2 Q10 -6 14 0 Q10 2 6 6 Q3 10 0 4 Q-3 10 -6 6 Q-10 2 -14 0 Z"
+                                fill="#1A0A14" opacity="0.7" />
+                        </g>
+                        <!-- Gotham skyline silhouette -->
+                        <g fill="#0D0510" opacity="0.9">
+                            <rect x="0" y="78" width="10" height="22" />
+                            <rect x="8" y="72" width="8" height="28" />
+                            <rect x="14" y="84" width="6" height="16" />
+                            <rect x="76" y="80" width="6" height="20" />
+                            <rect x="82" y="74" width="8" height="26" />
+                            <rect x="88" y="82" width="12" height="18" />
+                            <path d="M82 74 L84 70 L86 74 Z" />
+                            <path d="M8 72 L10 67 L12 72 Z" />
+                        </g>
+                        <!-- Tiny lit windows in skyline -->
+                        <g fill="#D97757" opacity="0.6">
+                            <rect x="2" y="82" width="1.4" height="1.4" />
+                            <rect x="6" y="86" width="1.4" height="1.4" />
+                            <rect x="10" y="78" width="1.4" height="1.4" />
+                            <rect x="84" y="80" width="1.4" height="1.4" />
+                            <rect x="88" y="86" width="1.4" height="1.4" />
+                            <rect x="92" y="90" width="1.4" height="1.4" />
+                        </g>
+                        <!-- Rain streaks -->
+                        <g stroke="#F2D5C4" stroke-width="0.4" opacity="0.25">
+                            <line x1="10" y1="6" x2="6" y2="18" />
+                            <line x1="34" y1="4" x2="30" y2="16" />
+                            <line x1="58" y1="8" x2="54" y2="20" />
+                            <line x1="82" y1="6" x2="78" y2="18" />
+                            <line x1="22" y1="48" x2="18" y2="60" />
+                            <line x1="74" y1="48" x2="70" y2="60" />
+                        </g>
+                        <!-- Batman figure -->
+                        <g filter="url(#opusMaxBatShadow)">
+                            <!-- Dramatic cape with scalloped edges -->
+                            <path d="M50 30 Q18 56 8 96 Q22 84 32 92 Q42 82 50 92 Q58 82 68 92 Q78 84 92 96 Q82 56 50 30 Z"
+                                fill="url(#opusMaxBatCape)" />
+                            <!-- Cape inner folds with subtle coral glow -->
+                            <path d="M50 30 Q38 56 30 80" stroke="#3D2418" stroke-width="0.6" fill="none" opacity="0.7" />
+                            <path d="M50 30 Q62 56 70 80" stroke="#3D2418" stroke-width="0.6" fill="none" opacity="0.7" />
+                            <path d="M50 36 Q42 60 36 84" stroke="#5C2A1E" stroke-width="0.4" fill="none" opacity="0.5" />
+                            <path d="M50 36 Q58 60 64 84" stroke="#5C2A1E" stroke-width="0.4" fill="none" opacity="0.5" />
+                            <!-- Cape rim coral highlight (from sunset) -->
+                            <path d="M50 30 Q18 56 8 96" stroke="#D97757" stroke-width="0.4" fill="none" opacity="0.4" />
+                            <path d="M50 30 Q82 56 92 96" stroke="#D97757" stroke-width="0.4" fill="none" opacity="0.4" />
+                            <!-- Cowl base / head -->
+                            <ellipse cx="50" cy="46" rx="18" ry="20" fill="url(#opusMaxBatCowl)" />
+                            <!-- Cowl side shadow -->
+                            <path d="M32 46 Q34 56 42 62" stroke="#0D0510" stroke-width="0.5" fill="none" />
+                            <!-- Iconic ears - sharp and tall -->
+                            <path d="M32 44 L26 8 L42 36 Z" fill="url(#opusMaxBatCowl)" />
+                            <path d="M68 44 L74 8 L58 36 Z" fill="url(#opusMaxBatCowl)" />
+                            <!-- Ear coral rim light -->
+                            <path d="M30 36 L28 14" stroke="#D97757" stroke-width="0.4" opacity="0.6" />
+                            <path d="M70 36 L72 14" stroke="#D97757" stroke-width="0.4" opacity="0.6" />
+                            <!-- Ear inner shadow -->
+                            <path d="M32 42 L30 18" stroke="#0D0510" stroke-width="0.4" opacity="0.8" />
+                            <path d="M68 42 L70 18" stroke="#0D0510" stroke-width="0.4" opacity="0.8" />
+                            <!-- Brow bone shadow -->
+                            <path d="M34 42 Q50 36 66 42" stroke="#0D0510" stroke-width="0.8" fill="none" />
+                            <!-- Lower mask shadow -->
+                            <path d="M32 46 Q50 64 68 46 Q64 56 50 58 Q36 56 32 46 Z" fill="#0D0510" />
+                            <!-- Glowing white eyes (slit shape) -->
+                            <g filter="url(#opusMaxEyeGlow)">
+                                <path d="M36 44 L42 41 L48 44 L42 47 Z" fill="#FFEAD5" />
+                                <path d="M52 44 L58 41 L64 44 L58 47 Z" fill="#FFEAD5" />
+                                <!-- Pupils -->
+                                <ellipse cx="42" cy="44" rx="0.8" ry="1.2" fill="#1A0A14" />
+                                <ellipse cx="58" cy="44" rx="0.8" ry="1.2" fill="#1A0A14" />
+                            </g>
+                            <!-- Cheek shadow -->
+                            <path d="M36 52 Q42 56 46 56" stroke="#0D0510" stroke-width="0.6" fill="none" opacity="0.6" />
+                            <path d="M64 52 Q58 56 54 56" stroke="#0D0510" stroke-width="0.6" fill="none" opacity="0.6" />
+                            <!-- Nose ridge shadow -->
+                            <path d="M50 48 L47 56 L53 56 Z" fill="#0D0510" />
+                            <path d="M48 56 Q50 58 52 56" stroke="#0D0510" stroke-width="0.4" fill="none" />
+                            <!-- Stern mouth -->
+                            <path d="M44 60 Q50 62 56 60" stroke="#0D0510" stroke-width="1.2" fill="none" stroke-linecap="round" />
+                            <!-- Jawline -->
+                            <path d="M34 56 Q50 70 66 56" stroke="#0D0510" stroke-width="0.5" fill="none" />
+                            <!-- Chin highlight (coral rim from below) -->
+                            <path d="M44 64 Q50 68 56 64" stroke="#D97757" stroke-width="0.4" fill="none" opacity="0.6" />
+                            <!-- Neck shadow -->
+                            <path d="M42 66 L42 74 L58 74 L58 66" fill="#0D0510" />
+                            <!-- Chest bat symbol (copper/coral) -->
+                            <ellipse cx="50" cy="80" rx="16" ry="9" fill="url(#opusMaxBatSymbol)" />
+                            <ellipse cx="50" cy="80" rx="14" ry="7.5" fill="none" stroke="#FAF1E4" stroke-width="0.4" opacity="0.7" />
+                            <!-- Bat symbol detail -->
+                            <path d="M36 80
+                                     Q39 74 43 76
+                                     Q46 70 50 73
+                                     Q54 70 57 76
+                                     Q61 74 64 80
+                                     Q61 78 58 81
+                                     Q56 84 54 81
+                                     Q52 85 50 82
+                                     Q48 85 46 81
+                                     Q44 84 42 81
+                                     Q39 78 36 80 Z"
+                                fill="#0D0510" />
+                            <!-- Utility belt -->
+                            <rect x="36" y="90" width="28" height="3.5" fill="url(#opusMaxBatSymbol)" rx="1" />
+                            <g fill="#0D0510">
+                                <rect x="40" y="90.5" width="3" height="2.5" rx="0.4" />
+                                <rect x="46" y="90.5" width="3" height="2.5" rx="0.4" />
+                                <rect x="52" y="90.5" width="3" height="2.5" rx="0.4" />
+                                <rect x="58" y="90.5" width="3" height="2.5" rx="0.4" />
+                            </g>
+                            <!-- Belt centerpiece -->
+                            <rect x="48" y="89.5" width="4" height="4.5" fill="#FAF1E4" />
+                            <rect x="48.5" y="90" width="3" height="3.5" fill="#D97757" />
+                        </g>
                     </svg>
                 </div>
             </div>
