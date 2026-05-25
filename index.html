@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Gallery — Original vs. Reimagined</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A227;
+            --gold-light: #E8D48B;
+            --gold-dark: #8B6914;
+            --obsidian: #0D0D0D;
+            --charcoal: #1A1A1A;
+            --slate: #2D2D2D;
+            --ivory: #F5F2E8;
+            --cream: #FAF8F0;
+            --accent-red: #8B2635;
+            --accent-teal: #2A6B6B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--obsidian);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Art Deco geometric header */
+        header {
+            position: relative;
+            padding: 80px 40px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--charcoal) 0%, var(--obsidian) 100%);
+            border-bottom: 1px solid var(--gold-dark);
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Art Deco sunburst pattern */
+        .deco-pattern {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 60px;
+            opacity: 0.6;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--ivory);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            animation: titleReveal 1.2s ease-out;
+        }
+
+        @keyframes titleReveal {
+            from {
+                opacity: 0;
+                letter-spacing: 0.5em;
+            }
+
+            to {
+                opacity: 1;
+                letter-spacing: 0.15em;
+            }
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .subtitle {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main gallery grid */
+        .gallery {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 60px 40px 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+        }
+
+        /* Each comparison card */
+        .comparison-card {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+            gap: 0;
+            background: var(--charcoal);
+            border: 1px solid var(--slate);
+            position: relative;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: cardReveal 0.8s ease-out forwards;
+        }
+
+        .comparison-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .comparison-card:nth-child(2) {
+            animation-delay: 0.35s;
+        }
+
+        .comparison-card:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        .comparison-card:nth-child(4) {
+            animation-delay: 0.65s;
+        }
+
+        .comparison-card:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        .comparison-card:nth-child(6) {
+            animation-delay: 0.95s;
+        }
+
+        @keyframes cardReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Gold corner accents */
+        .comparison-card::before,
+        .comparison-card::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--gold);
+            pointer-events: none;
+        }
+
+        .comparison-card::before {
+            top: -1px;
+            left: -1px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .comparison-card::after {
+            bottom: -1px;
+            right: -1px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Card title strip */
+        .card-title {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--obsidian);
+            padding: 8px 40px;
+            border: 1px solid var(--gold);
+            z-index: 10;
+        }
+
+        .card-title h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* Original side */
+        .svg-original {
+            padding: 60px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--slate);
+            position: relative;
+        }
+
+        .svg-original::before {
+            content: 'Opus 4.5';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+        }
+
+        /* Divider */
+        .divider {
+            width: 1px;
+            background: linear-gradient(180deg, var(--gold-dark), var(--gold), var(--gold-dark));
+            position: relative;
+        }
+
+        .divider::before {
+            content: 'VS';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--obsidian);
+            padding: 15px 8px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+        }
+
+        /* Reimagined side */
+        .svg-reimagined {
+            padding: 60px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--charcoal);
+            position: relative;
+        }
+
+        .svg-reimagined::before {
+            content: 'Opus 4.5 + Frontend Design Skill';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        /* Opus Plus side */
+        .svg-opus-plus {
+            padding: 60px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--slate);
+            position: relative;
+        }
+
+        .svg-opus-plus::before {
+            content: 'Gemini 3 Pro (High)';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--accent-teal);
+            text-transform: uppercase;
+        }
+
+        /* Gemini Flash side */
+        .svg-gemini-flash {
+            padding: 60px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--charcoal);
+            position: relative;
+        }
+
+        .svg-gemini-flash::before {
+            content: 'Gemini 3 Flash';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--accent-red);
+            text-transform: uppercase;
+        }
+
+        .svg-gemini-flash .svg-container {
+            transition: transform 0.4s ease;
+        }
+
+        .comparison-card:hover .svg-gemini-flash .svg-container {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 15px rgba(139, 38, 53, 0.3));
+        }
+
+        .svg-opus-plus .svg-container {
+            transition: transform 0.4s ease;
+        }
+
+        .comparison-card:hover .svg-opus-plus .svg-container {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 15px rgba(201, 162, 39, 0.3));
+        }
+
+        /* SVG containers */
+        .svg-container {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .svg-original .svg-container {
+            opacity: 0.7;
+            filter: grayscale(30%);
+            transition: all 0.4s ease;
+        }
+
+        .comparison-card:hover .svg-original .svg-container {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+
+        .svg-reimagined .svg-container {
+            transition: transform 0.4s ease;
+        }
+
+        .comparison-card:hover .svg-reimagined .svg-container {
+            transform: scale(1.05);
+        }
+
+        .svg-container svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--charcoal);
+            border-top: 1px solid var(--slate);
+        }
+
+        footer p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.1em;
+        }
+
+        footer span {
+            color: var(--gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .comparison-card {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto auto auto;
+            }
+
+            .divider {
+                width: 100%;
+                height: 1px;
+            }
+
+            .divider::before {
+                padding: 8px 15px;
+            }
+
+            .svg-original::before {
+                top: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .svg-reimagined::before {
+                top: 15px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .svg-opus-plus::before {
+                top: 15px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 60px 20px 40px;
+            }
+
+            .gallery {
+                padding: 40px 20px 80px;
+                gap: 60px;
+            }
+
+            .svg-container {
+                width: 160px;
+                height: 160px;
+            }
+
+            .card-title {
+                padding: 6px 25px;
+            }
+
+            .card-title h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- Art Deco sunburst SVG -->
+        <svg class="deco-pattern" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M60 60 L60 0" stroke="#C9A227" stroke-width="1" />
+            <path d="M60 60 L30 0" stroke="#C9A227" stroke-width="1" />
+            <path d="M60 60 L90 0" stroke="#C9A227" stroke-width="1" />
+            <path d="M60 60 L0 20" stroke="#C9A227" stroke-width="1" />
+            <path d="M60 60 L120 20" stroke="#C9A227" stroke-width="1" />
+            <path d="M60 60 L15 0" stroke="#C9A227" stroke-width="0.5" />
+            <path d="M60 60 L105 0" stroke="#C9A227" stroke-width="0.5" />
+            <path d="M60 60 L45 0" stroke="#C9A227" stroke-width="0.5" />
+            <path d="M60 60 L75 0" stroke="#C9A227" stroke-width="0.5" />
+        </svg>
+        <h1>SVG Gallery</h1>
+        <h1>SVG Gallery</h1>
+        <p class="subtitle">Opus 4.5 vs. Gemini 3 Pro vs. Gemini 3 Flash</p>
+    </header>
+
+    <main class="gallery">
+        <!-- Monstera Plant -->
+        <article class="comparison-card">
+            <div class="card-title">
+                <h2>Monstera Plant</h2>
+            </div>
+
+            <div class="svg-original">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M35 85 L40 70 L60 70 L65 85 Z" fill="#d35400" />
+                        <ellipse cx="50" cy="70" rx="12" ry="3" fill="#e67e22" />
+                        <path d="M50 70 Q48 55 50 45" stroke="#27ae60" stroke-width="3" fill="none" />
+                        <path d="M50 60 Q45 50 40 40" stroke="#27ae60" stroke-width="2" fill="none" />
+                        <path d="M50 55 Q55 45 60 35" stroke="#27ae60" stroke-width="2" fill="none" />
+                        <path d="M50 45 Q30 35 25 20 Q35 25 50 20 Q45 30 50 45" fill="#2ecc71" />
+                        <path d="M37 32 Q40 28 43 32" stroke="#27ae60" stroke-width="1" fill="none" />
+                        <path d="M40 40 Q15 35 10 15 Q25 20 35 10 Q30 25 40 40" fill="#27ae60" />
+                        <path d="M22 25 Q25 20 30 24" stroke="#1e8449" stroke-width="1" fill="none" />
+                        <path d="M60 35 Q75 25 85 15 Q75 20 70 10 Q72 25 60 35" fill="#2ecc71" />
+                        <path d="M72 22 Q75 18 78 22" stroke="#27ae60" stroke-width="1" fill="none" />
+                        <path d="M55 50 Q70 40 80 30 Q72 38 75 25 Q68 40 55 50" fill="#27ae60" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-reimagined">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="potGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#C9A227" />
+                                <stop offset="100%" stop-color="#8B6914" />
+                            </linearGradient>
+                            <linearGradient id="leafGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1B5E20" />
+                                <stop offset="50%" stop-color="#2E7D32" />
+                                <stop offset="100%" stop-color="#43A047" />
+                            </linearGradient>
+                            <linearGradient id="leafGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#43A047" />
+                                <stop offset="100%" stop-color="#1B5E20" />
+                            </linearGradient>
+                            <filter id="plantShadow">
+                                <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#000" flood-opacity="0.3" />
+                            </filter>
+                        </defs>
+                        <!-- Elegant pot -->
+                        <path d="M32 92 L38 72 L62 72 L68 92 Z" fill="url(#potGrad)" />
+                        <ellipse cx="50" cy="72" rx="14" ry="4" fill="#E8D48B" />
+                        <ellipse cx="50" cy="72" rx="10" ry="2.5" fill="#5D4E37" />
+                        <!-- Soil -->
+                        <ellipse cx="50" cy="72" rx="9" ry="2" fill="#3E2723" />
+                        <!-- Main stems with curves -->
+                        <path d="M50 72 Q47 60 50 48" stroke="#2E7D32" stroke-width="3" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M50 65 Q42 52 35 38" stroke="#388E3C" stroke-width="2.5" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M50 58 Q58 45 65 32" stroke="#388E3C" stroke-width="2.5" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M50 70 Q56 62 62 52" stroke="#43A047" stroke-width="2" fill="none"
+                            stroke-linecap="round" />
+                        <g filter="url(#plantShadow)">
+                            <!-- Large left leaf with holes -->
+                            <path d="M35 38 Q10 30 5 8 Q20 18 30 5 Q28 22 35 38" fill="url(#leafGrad1)" />
+                            <ellipse cx="18" cy="18" rx="3" ry="4" fill="#1A1A1A" opacity="0.8" />
+                            <ellipse cx="25" cy="12" rx="2" ry="3" fill="#1A1A1A" opacity="0.8" />
+                            <path d="M12 22 Q18 15 26 20" stroke="#1B5E20" stroke-width="0.8" fill="none" />
+                            <!-- Center leaf -->
+                            <path d="M50 48 Q30 35 22 15 Q38 25 50 12 Q62 25 78 15 Q70 35 50 48"
+                                fill="url(#leafGrad2)" />
+                            <ellipse cx="38" cy="28" rx="3" ry="4" fill="#1A1A1A" opacity="0.8" />
+                            <ellipse cx="62" cy="28" rx="3" ry="4" fill="#1A1A1A" opacity="0.8" />
+                            <ellipse cx="50" cy="22" rx="2" ry="3" fill="#1A1A1A" opacity="0.8" />
+                            <path d="M50 45 L50 18" stroke="#1B5E20" stroke-width="0.8" fill="none" />
+                            <!-- Right leaf -->
+                            <path d="M65 32 Q85 22 95 5 Q82 18 75 5 Q78 22 65 32" fill="url(#leafGrad1)" />
+                            <ellipse cx="82" cy="14" rx="2.5" ry="3.5" fill="#1A1A1A" opacity="0.8" />
+                            <path d="M75 20 Q82 14 88 18" stroke="#1B5E20" stroke-width="0.8" fill="none" />
+                            <!-- Small accent leaf -->
+                            <path d="M62 52 Q78 45 85 35 Q76 42 72 35 Q74 45 62 52" fill="#4CAF50" />
+                        </g>
+                        <!-- Decorative pot lines -->
+                        <path d="M36 80 L64 80" stroke="#E8D48B" stroke-width="1" opacity="0.5" />
+                        <path d="M34 86 L66 86" stroke="#E8D48B" stroke-width="1" opacity="0.5" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-plus">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="glassPot" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="rgba(255,255,255,0.4)" />
+                                <stop offset="50%" stop-color="rgba(255,255,255,0.1)" />
+                                <stop offset="100%" stop-color="rgba(255,255,255,0.3)" />
+                            </linearGradient>
+                            <linearGradient id="soil" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#5D4037" />
+                                <stop offset="100%" stop-color="#3E2723" />
+                            </linearGradient>
+                            <linearGradient id="leafReal" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#4CAF50" />
+                                <stop offset="100%" stop-color="#1B5E20" />
+                            </linearGradient>
+                            <filter id="softShadow">
+                                <feDropShadow dx="2" dy="4" stdDeviation="2" flood-color="#000" flood-opacity="0.2" />
+                            </filter>
+                        </defs>
+
+                        <!-- Glass Pot with Soil -->
+                        <path d="M35 90 L38 75 L62 75 L65 90 Q65 92 62 92 L38 92 Q35 92 35 90" fill="url(#soil)" />
+                        <path d="M34 90 L37 74 L63 74 L66 90 Q66 93 63 93 L37 93 Q34 93 34 90" fill="url(#glassPot)"
+                            stroke="rgba(255,255,255,0.5)" stroke-width="0.5" />
+
+                        <!-- Stems -->
+                        <g stroke="#33691E" stroke-width="1.5" fill="none" stroke-linecap="round">
+                            <path d="M50 75 Q45 60 30 45" />
+                            <path d="M50 75 Q55 55 70 35" />
+                            <path d="M50 75 Q50 50 50 30" />
+                        </g>
+
+                        <!-- Leaves with holes and veins -->
+                        <g filter="url(#softShadow)">
+                            <!-- Left Leaf -->
+                            <g transform="translate(30, 45) rotate(-20)">
+                                <path d="M0 0 Q-15 -10 -5 -25 Q10 -15 0 0" fill="url(#leafReal)" />
+                                <path d="M-2 -10 Q-5 -12 -3 -15 M-4 -5 Q-8 -8 -6 -12" fill="#1A1A1A" opacity="0.6" />
+                                <!-- Holes -->
+                            </g>
+
+                            <!-- Right Leaf -->
+                            <g transform="translate(70, 35) rotate(20)">
+                                <path d="M0 0 Q15 -10 5 -25 Q-10 -15 0 0" fill="url(#leafReal)" />
+                                <path d="M2 -10 Q5 -12 3 -15 M4 -5 Q8 -8 6 -12" fill="#1A1A1A" opacity="0.6" />
+                            </g>
+
+                            <!-- Center Leaf (Big) -->
+                            <g transform="translate(50, 30)">
+                                <path d="M0 0 Q-20 -20 0 -40 Q20 -20 0 0" fill="url(#leafReal)" />
+                                <path
+                                    d="M-5 -20 Q-10 -22 -8 -28 M5 -20 Q10 -22 8 -28 M-3 -10 Q-8 -12 -6 -15 M3 -10 Q8 -12 6 -15"
+                                    fill="#1A1A1A" opacity="0.6" />
+                                <path d="M0 0 L0 -35" stroke="#4CAF50" stroke-width="0.5" opacity="0.5" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-gemini-flash">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="leafGradFlash" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#2D5A27" />
+                                <stop offset="100%" stop-color="#1A3317" />
+                            </linearGradient>
+                            <filter id="leafShadowFlash">
+                                <feDropShadow dx="1" dy="2" stdDeviation="1" flood-opacity="0.3" />
+                            </filter>
+                        </defs>
+                        <path d="M35 95 L40 75 L60 75 L65 95 Z" fill="#222" />
+                        <rect x="33" y="75" width="34" height="4" rx="1" fill="#333" />
+                        <path d="M50 75 Q45 50 30 35" stroke="#1A3317" stroke-width="1.5" fill="none" />
+                        <path d="M50 75 Q55 55 75 40" stroke="#1A3317" stroke-width="1.5" fill="none" />
+                        <path d="M50 75 Q50 40 50 20" stroke="#1A3317" stroke-width="2" fill="none" />
+                        <g filter="url(#leafShadowFlash)">
+                            <path d="M50 20 Q30 15 25 40 Q45 35 50 60 Q55 35 75 40 Q70 15 50 20"
+                                fill="url(#leafGradFlash)" />
+                            <circle cx="42" cy="30" r="2" fill="#050505" opacity="0.4" />
+                            <circle cx="58" cy="30" r="2" fill="#050505" opacity="0.4" />
+                            <circle cx="50" cy="45" r="1.5" fill="#050505" opacity="0.4" />
+                            <path d="M30 35 Q10 30 5 50 Q25 45 30 65 Q35 45 50 40 Q30 35 30 35"
+                                fill="url(#leafGradFlash)" transform="rotate(-20 30 35)" />
+                            <path d="M75 40 Q90 35 95 55 Q75 50 70 70 Q65 50 50 45 Q75 40 75 40"
+                                fill="url(#leafGradFlash)" transform="rotate(20 75 40)" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </article>
+
+        <!-- Airplane -->
+        <article class="comparison-card">
+            <div class="card-title">
+                <h2>Airplane</h2>
+            </div>
+
+            <div class="svg-original">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="50" cy="50" rx="35" ry="8" fill="#ecf0f1" />
+                        <ellipse cx="50" cy="48" rx="33" ry="5" fill="#bdc3c7" />
+                        <path d="M85 50 Q95 50 90 50 L85 47 L85 53 Z" fill="#3498db" />
+                        <path d="M15 50 L8 35 L18 45 Z" fill="#3498db" />
+                        <path d="M15 50 L8 65 L18 55 Z" fill="#2980b9" />
+                        <path d="M40 50 L30 25 L55 45 Z" fill="#3498db" />
+                        <path d="M40 50 L30 75 L55 55 Z" fill="#2980b9" />
+                        <circle cx="75" cy="48" r="2" fill="#3498db" />
+                        <circle cx="68" cy="48" r="2" fill="#3498db" />
+                        <circle cx="61" cy="48" r="2" fill="#3498db" />
+                        <circle cx="54" cy="48" r="2" fill="#3498db" />
+                        <ellipse cx="45" cy="58" rx="5" ry="3" fill="#7f8c8d" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-reimagined">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="fuselageGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#F5F5F5" />
+                                <stop offset="30%" stop-color="#E0E0E0" />
+                                <stop offset="100%" stop-color="#BDBDBD" />
+                            </linearGradient>
+                            <linearGradient id="wingGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#C9A227" />
+                                <stop offset="100%" stop-color="#8B6914" />
+                            </linearGradient>
+                            <linearGradient id="tailGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" stop-color="#8B2635" />
+                                <stop offset="100%" stop-color="#C62828" />
+                            </linearGradient>
+                            <filter id="planeShadow">
+                                <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#000" flood-opacity="0.25" />
+                            </filter>
+                        </defs>
+                        <g filter="url(#planeShadow)">
+                            <!-- Art Deco style wings -->
+                            <path d="M50 50 L25 20 L30 22 L55 48 Z" fill="url(#wingGrad)" />
+                            <path d="M50 50 L25 80 L30 78 L55 52 Z" fill="url(#wingGrad)" opacity="0.85" />
+                            <!-- Wing stripes -->
+                            <path d="M35 32 L45 45" stroke="#F5F2E8" stroke-width="1.5" />
+                            <path d="M35 68 L45 55" stroke="#F5F2E8" stroke-width="1.5" />
+                            <!-- Fuselage -->
+                            <ellipse cx="50" cy="50" rx="38" ry="7" fill="url(#fuselageGrad)" />
+                            <!-- Cockpit -->
+                            <path d="M88 50 Q95 50 92 50 L88 46 Q90 50 88 54 Z" fill="#1A237E" />
+                            <path d="M86 48 Q88 50 86 52" stroke="#64B5F6" stroke-width="1" fill="none" />
+                            <!-- Tail fin -->
+                            <path d="M12 50 L6 32 L16 46 Z" fill="url(#tailGrad)" />
+                            <path d="M12 50 L6 68 L16 54 Z" fill="url(#tailGrad)" opacity="0.8" />
+                            <!-- Art Deco tail stripe -->
+                            <rect x="12" y="47" width="12" height="6" fill="#C9A227" />
+                            <rect x="12" y="49" width="12" height="2" fill="#0D0D0D" />
+                            <!-- Windows with art deco frames -->
+                            <g fill="#1A237E">
+                                <rect x="72" y="47" width="4" height="5" rx="1" />
+                                <rect x="64" y="47" width="4" height="5" rx="1" />
+                                <rect x="56" y="47" width="4" height="5" rx="1" />
+                                <rect x="48" y="47" width="4" height="5" rx="1" />
+                                <rect x="40" y="47" width="4" height="5" rx="1" />
+                            </g>
+                            <!-- Window highlights -->
+                            <g fill="#64B5F6" opacity="0.6">
+                                <rect x="73" y="48" width="1" height="3" />
+                                <rect x="65" y="48" width="1" height="3" />
+                                <rect x="57" y="48" width="1" height="3" />
+                                <rect x="49" y="48" width="1" height="3" />
+                                <rect x="41" y="48" width="1" height="3" />
+                            </g>
+                            <!-- Engines -->
+                            <ellipse cx="35" cy="58" rx="6" ry="3.5" fill="#424242" />
+                            <ellipse cx="35" cy="58" rx="3" ry="2" fill="#212121" />
+                            <ellipse cx="35" cy="42" rx="6" ry="3.5" fill="#424242" />
+                            <ellipse cx="35" cy="42" rx="3" ry="2" fill="#212121" />
+                        </g>
+                        <!-- Gold accent line -->
+                        <path d="M20 50 L85 50" stroke="#C9A227" stroke-width="0.5" opacity="0.5" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-plus">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="skySunset" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FFD54F" />
+                                <stop offset="50%" stop-color="#FF8A65" />
+                                <stop offset="100%" stop-color="#D84315" />
+                            </linearGradient>
+                            <linearGradient id="planeMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ECEFF1" />
+                                <stop offset="50%" stop-color="#B0BEC5" />
+                                <stop offset="100%" stop-color="#78909C" />
+                            </linearGradient>
+                            <filter id="motionBlur" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="1,0" />
+                            </filter>
+                        </defs>
+
+                        <!-- Background Circle -->
+                        <circle cx="50" cy="50" r="45" fill="url(#skySunset)" />
+
+                        <!-- Clouds -->
+                        <path d="M10 60 Q20 50 30 60 T50 60 T70 60" stroke="rgba(255,255,255,0.4)" stroke-width="2"
+                            fill="none" />
+                        <path d="M20 80 Q40 70 60 80 T90 80" stroke="rgba(255,255,255,0.3)" stroke-width="3"
+                            fill="none" />
+
+                        <!-- Contrails -->
+                        <path d="M20 65 L40 55" stroke="white" stroke-width="2" opacity="0.6"
+                            filter="url(#motionBlur)" />
+                        <path d="M20 70 L40 60" stroke="white" stroke-width="2" opacity="0.6"
+                            filter="url(#motionBlur)" />
+
+                        <!-- Plane Banking -->
+                        <g transform="translate(50, 50) rotate(-15)">
+                            <!-- Far Wing -->
+                            <path d="M-10 -5 L10 -20 L15 -5 Z" fill="#90A4AE" />
+
+                            <!-- Fuselage -->
+                            <path d="M-30 0 Q-20 -8 10 -8 L30 -5 Q40 0 30 5 L10 8 Q-20 8 -30 0"
+                                fill="url(#planeMetal)" />
+
+                            <!-- Tail -->
+                            <path d="M-25 -2 L-35 -15 L-20 -5 Z" fill="#78909C" />
+
+                            <!-- Near Wing -->
+                            <path d="M0 2 L25 25 L20 5 Z" fill="#CFD8DC" />
+
+                            <!-- Cockpit -->
+                            <path d="M25 -3 Q30 -3 28 0 Q25 3 22 2 Z" fill="#263238" />
+
+                            <!-- Engine -->
+                            <ellipse cx="10" cy="10" rx="3" ry="5" fill="#546E7A" transform="rotate(45 10 10)" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-gemini-flash">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="planeGradFlash" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#fff" />
+                                <stop offset="100%" stop-color="#ccc" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M10 45 L30 48 M10 55 L30 52" stroke="rgba(255,255,255,0.2)" stroke-width="2"
+                            stroke-linecap="round" />
+                        <path d="M45 50 L20 20 L35 20 L55 50 Z" fill="#7c4dff" />
+                        <path d="M45 50 L20 80 L35 80 L55 50 Z" fill="#5e35b1" />
+                        <path d="M15 50 Q15 42 50 42 L85 45 Q95 50 85 55 L50 58 Q15 58 15 50"
+                            fill="url(#planeGradFlash)" />
+                        <path d="M25 42 L15 25 L25 25 L35 42 Z" fill="#7c4dff" />
+                        <rect x="55" y="47" width="3" height="2" rx="0.5" fill="#333" />
+                        <rect x="62" y="47" width="3" height="2" rx="0.5" fill="#333" />
+                        <rect x="69" y="47" width="3" height="2" rx="0.5" fill="#333" />
+                        <rect x="76" y="47" width="3" height="2" rx="0.5" fill="#333" />
+                        <path d="M85 46 Q88 46 88 50 Q88 54 85 54 Z" fill="#1a1a1a" />
+                    </svg>
+                </div>
+            </div>
+        </article>
+
+        <!-- Bus -->
+        <article class="comparison-card">
+            <div class="card-title">
+                <h2>Bus</h2>
+            </div>
+
+            <div class="svg-original">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="35" width="80" height="35" rx="5" fill="#e74c3c" />
+                        <rect x="12" y="30" width="76" height="8" rx="3" fill="#c0392b" />
+                        <rect x="15" y="40" width="12" height="15" rx="2" fill="#ecf0f1" />
+                        <rect x="30" y="40" width="12" height="15" rx="2" fill="#ecf0f1" />
+                        <rect x="45" y="40" width="12" height="15" rx="2" fill="#ecf0f1" />
+                        <rect x="60" y="40" width="12" height="15" rx="2" fill="#ecf0f1" />
+                        <rect x="75" y="40" width="12" height="15" rx="2" fill="#85c1e9" />
+                        <rect x="10" y="58" width="80" height="4" fill="#f39c12" />
+                        <rect x="75" y="45" width="10" height="20" fill="#2c3e50" />
+                        <circle cx="77" cy="55" r="1" fill="#f1c40f" />
+                        <circle cx="25" cy="72" r="8" fill="#2c3e50" />
+                        <circle cx="25" cy="72" r="4" fill="#7f8c8d" />
+                        <circle cx="75" cy="72" r="8" fill="#2c3e50" />
+                        <circle cx="75" cy="72" r="4" fill="#7f8c8d" />
+                        <rect x="85" y="55" width="5" height="5" rx="1" fill="#f1c40f" />
+                        <rect x="10" y="55" width="4" height="4" rx="1" fill="#e74c3c" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-reimagined">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="busBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#8B2635" />
+                                <stop offset="50%" stop-color="#6D1F2B" />
+                                <stop offset="100%" stop-color="#4A1520" />
+                            </linearGradient>
+                            <linearGradient id="busWindowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#E3F2FD" />
+                                <stop offset="100%" stop-color="#90CAF9" />
+                            </linearGradient>
+                            <filter id="busShadow">
+                                <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000" flood-opacity="0.4" />
+                            </filter>
+                        </defs>
+                        <g filter="url(#busShadow)">
+                            <!-- Double-decker body lower -->
+                            <rect x="8" y="50" width="84" height="25" rx="3" fill="url(#busBodyGrad)" />
+                            <!-- Upper deck -->
+                            <rect x="12" y="25" width="76" height="28" rx="3" fill="url(#busBodyGrad)" />
+                            <!-- Roof curve -->
+                            <path d="M12 25 Q50 18 88 25" fill="#4A1520" />
+                            <!-- Gold stripe -->
+                            <rect x="8" y="48" width="84" height="4" fill="#C9A227" />
+                            <rect x="12" y="50" width="76" height="1" fill="#E8D48B" />
+                            <!-- Cream band -->
+                            <rect x="8" y="68" width="84" height="5" fill="#F5F2E8" />
+                            <!-- Upper deck windows -->
+                            <g fill="url(#busWindowGrad)">
+                                <rect x="16" y="30" width="10" height="14" rx="1" />
+                                <rect x="29" y="30" width="10" height="14" rx="1" />
+                                <rect x="42" y="30" width="10" height="14" rx="1" />
+                                <rect x="55" y="30" width="10" height="14" rx="1" />
+                                <rect x="68" y="30" width="10" height="14" rx="1" />
+                            </g>
+                            <!-- Lower deck windows -->
+                            <g fill="url(#busWindowGrad)">
+                                <rect x="16" y="53" width="10" height="12" rx="1" />
+                                <rect x="29" y="53" width="10" height="12" rx="1" />
+                                <rect x="55" y="53" width="10" height="12" rx="1" />
+                                <rect x="68" y="53" width="10" height="12" rx="1" />
+                            </g>
+                            <!-- Door -->
+                            <rect x="42" y="53" width="10" height="20" fill="#1A1A1A" />
+                            <rect x="46" y="55" width="2" height="16" fill="#2D2D2D" />
+                            <circle cx="50" cy="63" r="1.5" fill="#C9A227" />
+                            <!-- Wheels -->
+                            <circle cx="24" cy="77" r="9" fill="#1A1A1A" />
+                            <circle cx="24" cy="77" r="6" fill="#424242" />
+                            <circle cx="24" cy="77" r="3" fill="#C9A227" />
+                            <circle cx="76" cy="77" r="9" fill="#1A1A1A" />
+                            <circle cx="76" cy="77" r="6" fill="#424242" />
+                            <circle cx="76" cy="77" r="3" fill="#C9A227" />
+                            <!-- Wheel arches -->
+                            <path d="M13 75 Q24 68 35 75" fill="#4A1520" />
+                            <path d="M65 75 Q76 68 87 75" fill="#4A1520" />
+                            <!-- Front details -->
+                            <rect x="88" y="55" width="4" height="8" rx="1" fill="#FFEB3B" />
+                            <rect x="88" y="64" width="4" height="3" rx="1" fill="#FF5722" />
+                            <!-- Rear light -->
+                            <rect x="8" y="58" width="3" height="6" rx="1" fill="#FF5722" />
+                            <!-- Destination sign -->
+                            <rect x="20" y="22" width="40" height="6" fill="#0D0D0D" />
+                            <text x="40" y="27" font-family="sans-serif" font-size="4" fill="#FFEB3B"
+                                text-anchor="middle">PICCADILLY</text>
+                            <!-- Route number -->
+                            <rect x="80" y="30" width="8" height="10" fill="#F5F2E8" />
+                            <text x="84" y="38" font-family="sans-serif" font-size="6" font-weight="bold" fill="#8B2635"
+                                text-anchor="middle">38</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-plus">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="busRed" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#D32F2F" />
+                                <stop offset="100%" stop-color="#B71C1C" />
+                            </linearGradient>
+                            <linearGradient id="glassBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#81D4FA" />
+                                <stop offset="100%" stop-color="#0288D1" />
+                            </linearGradient>
+                            <filter id="neonGlow">
+                                <feGaussianBlur stdDeviation="1" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Road Reflection -->
+                        <path d="M10 85 L90 85 L85 95 L15 95 Z" fill="#263238" opacity="0.5" />
+                        <path d="M15 85 L85 85 L80 92 L20 92 Z" fill="url(#busRed)" opacity="0.2"
+                            transform="scale(1, -1) translate(0, -180)" />
+
+                        <!-- Bus Body -->
+                        <rect x="15" y="25" width="70" height="55" rx="8" fill="url(#busRed)" />
+
+                        <!-- Windshield / Upper Deck Window -->
+                        <path d="M15 35 Q15 25 25 25 L75 25 Q85 25 85 35 L85 45 L15 45 Z" fill="url(#glassBlue)" />
+
+                        <!-- Lower Deck Window -->
+                        <rect x="15" y="50" width="70" height="15" fill="url(#glassBlue)" />
+
+                        <!-- Divider Line -->
+                        <rect x="15" y="45" width="70" height="5" fill="#B71C1C" />
+
+                        <!-- Headlights -->
+                        <circle cx="25" cy="72" r="3" fill="#FFF9C4" filter="url(#neonGlow)" />
+                        <circle cx="75" cy="72" r="3" fill="#FFF9C4" filter="url(#neonGlow)" />
+
+                        <!-- LED Destination Sign -->
+                        <rect x="35" y="28" width="30" height="5" fill="#000" />
+                        <text x="50" y="32" font-family="monospace" font-size="3" fill="#FFEB3B" text-anchor="middle"
+                            filter="url(#neonGlow)">FUTURE 4.5</text>
+
+                        <!-- Wheels -->
+                        <path d="M20 80 L30 80 L28 85 L22 85 Z" fill="#212121" />
+                        <path d="M70 80 L80 80 L78 85 L72 85 Z" fill="#212121" />
+
+                        <!-- Side Mirrors -->
+                        <path d="M15 40 L10 38 L10 45 L15 42" fill="#B71C1C" />
+                        <path d="M85 40 L90 38 L90 45 L85 42" fill="#B71C1C" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-gemini-flash">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="busGradFlash" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FFD700" />
+                                <stop offset="100%" stop-color="#FFA000" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="10" y="30" width="80" height="45" rx="6" fill="url(#busGradFlash)" />
+                        <rect x="10" y="60" width="80" height="15" rx="2" fill="#333" opacity="0.2" />
+                        <rect x="15" y="35" width="12" height="15" rx="2" fill="#222" />
+                        <rect x="32" y="35" width="12" height="15" rx="2" fill="#222" />
+                        <rect x="49" y="35" width="12" height="15" rx="2" fill="#222" />
+                        <rect x="66" y="35" width="12" height="15" rx="2" fill="#222" />
+                        <rect x="83" y="35" width="7" height="15" rx="1" fill="#222" />
+                        <circle cx="25" cy="75" r="8" fill="#111" />
+                        <circle cx="25" cy="75" r="4" fill="#333" />
+                        <circle cx="75" cy="75" r="8" fill="#111" />
+                        <circle cx="75" cy="75" r="4" fill="#333" />
+                        <circle cx="87" cy="65" r="2" fill="#FF5252" />
+                        <rect x="10" y="63" width="4" height="6" fill="#FFEB3B" />
+                    </svg>
+                </div>
+            </div>
+        </article>
+
+        <!-- Car -->
+        <article class="comparison-card">
+            <div class="card-title">
+                <h2>Car</h2>
+            </div>
+
+            <div class="svg-original">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 55 L20 45 L35 40 L65 40 L80 45 L85 55 L85 65 L15 65 Z" fill="#3498db" />
+                        <path d="M30 40 L35 28 L65 28 L70 40 Z" fill="#2980b9" />
+                        <path d="M33 38 L37 30 L48 30 L48 38 Z" fill="#85c1e9" />
+                        <path d="M52 38 L52 30 L63 30 L67 38 Z" fill="#85c1e9" />
+                        <rect x="15" y="58" width="70" height="10" fill="#2980b9" />
+                        <circle cx="28" cy="68" r="10" fill="#2c3e50" />
+                        <circle cx="28" cy="68" r="5" fill="#7f8c8d" />
+                        <circle cx="72" cy="68" r="10" fill="#2c3e50" />
+                        <circle cx="72" cy="68" r="5" fill="#7f8c8d" />
+                        <rect x="82" y="52" width="5" height="4" rx="1" fill="#f1c40f" />
+                        <rect x="13" y="52" width="5" height="4" rx="1" fill="#e74c3c" />
+                        <rect x="45" y="50" width="8" height="2" rx="1" fill="#1a5276" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-reimagined">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="carBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#0D0D0D" />
+                                <stop offset="40%" stop-color="#1A1A1A" />
+                                <stop offset="100%" stop-color="#2D2D2D" />
+                            </linearGradient>
+                            <linearGradient id="carWindowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#1A237E" />
+                                <stop offset="100%" stop-color="#0D47A1" />
+                            </linearGradient>
+                            <linearGradient id="chromeTrim" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#E8D48B" />
+                                <stop offset="50%" stop-color="#C9A227" />
+                                <stop offset="100%" stop-color="#8B6914" />
+                            </linearGradient>
+                            <filter id="carShadow">
+                                <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000" flood-opacity="0.5" />
+                            </filter>
+                            <filter id="carGlow">
+                                <feGaussianBlur stdDeviation="2" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <g filter="url(#carShadow)">
+                            <!-- Classic sports car silhouette -->
+                            <!-- Lower body -->
+                            <path d="M8 58 Q5 58 5 55 L8 50 L20 48 L80 48 L92 50 Q95 55 95 58 L95 68 L5 68 L5 58 Z"
+                                fill="url(#carBodyGrad)" />
+                            <!-- Upper body / cabin -->
+                            <path d="M28 48 L35 32 Q38 28 45 28 L55 28 Q62 28 65 32 L72 48 Z"
+                                fill="url(#carBodyGrad)" />
+                            <!-- Chrome trim -->
+                            <path d="M28 48 L72 48" stroke="url(#chromeTrim)" stroke-width="1.5" />
+                            <path d="M5 58 L95 58" stroke="url(#chromeTrim)" stroke-width="1" />
+                            <!-- Windows -->
+                            <path d="M32 46 L38 33 L48 33 L48 46 Z" fill="url(#carWindowGrad)" />
+                            <path d="M52 46 L52 33 L62 33 L68 46 Z" fill="url(#carWindowGrad)" />
+                            <!-- Window divider chrome -->
+                            <rect x="49" y="33" width="2" height="13" fill="url(#chromeTrim)" />
+                            <!-- Hood vents -->
+                            <rect x="76" y="52" width="8" height="1" fill="#C9A227" />
+                            <rect x="76" y="54" width="8" height="1" fill="#C9A227" />
+                            <rect x="76" y="56" width="8" height="1" fill="#C9A227" />
+                            <!-- Headlights -->
+                            <g filter="url(#carGlow)">
+                                <ellipse cx="90" cy="54" rx="3" ry="2.5" fill="#FFEB3B" />
+                                <ellipse cx="90" cy="54" rx="1.5" ry="1.2" fill="#FFF" />
+                            </g>
+                            <!-- Taillights -->
+                            <rect x="6" y="52" width="4" height="5" rx="1" fill="#B71C1C" />
+                            <rect x="7" y="53" width="2" height="3" fill="#F44336" />
+                            <!-- Wheels -->
+                            <circle cx="25" cy="68" r="11" fill="#0D0D0D" />
+                            <circle cx="25" cy="68" r="8" fill="#1A1A1A" />
+                            <circle cx="25" cy="68" r="5" fill="#2D2D2D" />
+                            <!-- Gold spoke wheel -->
+                            <circle cx="25" cy="68" r="3" fill="#C9A227" />
+                            <path d="M25 61 L25 75 M18 68 L32 68 M20 63 L30 73 M30 63 L20 73" stroke="#C9A227"
+                                stroke-width="1" />
+                            <circle cx="75" cy="68" r="11" fill="#0D0D0D" />
+                            <circle cx="75" cy="68" r="8" fill="#1A1A1A" />
+                            <circle cx="75" cy="68" r="5" fill="#2D2D2D" />
+                            <circle cx="75" cy="68" r="3" fill="#C9A227" />
+                            <path d="M75 61 L75 75 M68 68 L82 68 M70 63 L80 73 M80 63 L70 73" stroke="#C9A227"
+                                stroke-width="1" />
+                            <!-- Side mirror -->
+                            <ellipse cx="28" cy="42" rx="3" ry="2" fill="#1A1A1A" />
+                            <ellipse cx="72" cy="42" rx="3" ry="2" fill="#1A1A1A" />
+                            <!-- Door handle -->
+                            <rect x="42" y="52" width="6" height="1.5" rx="0.5" fill="url(#chromeTrim)" />
+                            <!-- Emblem -->
+                            <circle cx="85" cy="48" r="2" fill="url(#chromeTrim)" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-plus">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="carBodyFuture" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#263238" />
+                                <stop offset="50%" stop-color="#546E7A" />
+                                <stop offset="100%" stop-color="#263238" />
+                            </linearGradient>
+                            <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#00E5FF" />
+                                <stop offset="100%" stop-color="#18FFFF" />
+                            </linearGradient>
+                            <filter id="speedBlur">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="2,0" />
+                            </filter>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Speed Lines -->
+                        <path d="M10 60 L40 60" stroke="#00E5FF" stroke-width="1" opacity="0.5"
+                            filter="url(#speedBlur)" />
+                        <path d="M5 65 L30 65" stroke="#00E5FF" stroke-width="1" opacity="0.3"
+                            filter="url(#speedBlur)" />
+                        <path d="M15 55 L35 55" stroke="#00E5FF" stroke-width="1" opacity="0.4"
+                            filter="url(#speedBlur)" />
+
+                        <!-- Car Body -->
+                        <path d="M10 65 Q10 55 20 50 L35 45 Q45 35 60 35 L80 38 Q95 40 95 55 L95 65 L15 68 Q10 68 10 65"
+                            fill="url(#carBodyFuture)" />
+
+                        <!-- Cockpit -->
+                        <path d="M35 45 Q45 35 60 35 L75 38 L80 48 L30 50 Z" fill="#212121" />
+                        <path d="M35 45 Q45 35 60 35 L75 38" stroke="#00E5FF" stroke-width="0.5" fill="none"
+                            filter="url(#glow)" />
+
+                        <!-- Wheels (Hubless) -->
+                        <circle cx="25" cy="65" r="9" stroke="#00E5FF" stroke-width="2" fill="none"
+                            filter="url(#glow)" />
+                        <circle cx="25" cy="65" r="7" fill="#1A1A1A" />
+                        <circle cx="75" cy="65" r="9" stroke="#00E5FF" stroke-width="2" fill="none"
+                            filter="url(#glow)" />
+                        <circle cx="75" cy="65" r="7" fill="#1A1A1A" />
+
+                        <!-- Side Neon Strip -->
+                        <path d="M20 55 L85 52" stroke="#00E5FF" stroke-width="1" filter="url(#glow)" />
+
+                        <!-- Underglow -->
+                        <ellipse cx="50" cy="72" rx="40" ry="3" fill="#00E5FF" opacity="0.2" filter="url(#speedBlur)" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-gemini-flash">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="carGradFlash" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FF5252" />
+                                <stop offset="100%" stop-color="#D32F2F" />
+                            </linearGradient>
+                        </defs>
+                        <ellipse cx="50" cy="80" rx="40" ry="5" fill="rgba(0,0,0,0.3)" />
+                        <path
+                            d="M10 65 Q10 55 20 55 L30 40 Q35 35 45 35 L70 35 Q80 35 85 50 L90 55 Q95 55 95 65 L95 75 L10 75 Z"
+                            fill="url(#carGradFlash)" />
+                        <path d="M35 40 L45 40 L45 52 L32 52 Z" fill="#1a1a1a" />
+                        <path d="M50 40 L68 40 L78 52 L50 52 Z" fill="#1a1a1a" />
+                        <circle cx="25" cy="75" r="9" fill="#111" />
+                        <circle cx="25" cy="75" r="5" fill="#444" stroke="#777" stroke-width="1" />
+                        <circle cx="75" cy="75" r="9" fill="#111" />
+                        <circle cx="75" cy="75" r="5" fill="#444" stroke="#777" stroke-width="1" />
+                        <rect x="88" y="60" width="5" height="3" rx="1" fill="#FFEB3B" />
+                        <path d="M10 65 L20 65" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+                    </svg>
+                </div>
+            </div>
+        </article>
+
+        <!-- Building -->
+        <article class="comparison-card">
+            <div class="card-title">
+                <h2>Building</h2>
+            </div>
+
+            <div class="svg-original">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="25" y="20" width="50" height="70" fill="#7f8c8d" />
+                        <rect x="27" y="20" width="46" height="70" fill="#95a5a6" />
+                        <rect x="48" y="8" width="4" height="12" fill="#5d6d7e" />
+                        <circle cx="50" cy="8" r="2" fill="#e74c3c" />
+                        <rect x="32" y="25" width="8" height="8" fill="#f9e79f" />
+                        <rect x="46" y="25" width="8" height="8" fill="#85c1e9" />
+                        <rect x="60" y="25" width="8" height="8" fill="#f9e79f" />
+                        <rect x="32" y="38" width="8" height="8" fill="#85c1e9" />
+                        <rect x="46" y="38" width="8" height="8" fill="#f9e79f" />
+                        <rect x="60" y="38" width="8" height="8" fill="#85c1e9" />
+                        <rect x="32" y="51" width="8" height="8" fill="#f9e79f" />
+                        <rect x="46" y="51" width="8" height="8" fill="#85c1e9" />
+                        <rect x="60" y="51" width="8" height="8" fill="#f9e79f" />
+                        <rect x="32" y="64" width="8" height="8" fill="#85c1e9" />
+                        <rect x="60" y="64" width="8" height="8" fill="#f9e79f" />
+                        <rect x="44" y="72" width="12" height="18" fill="#2c3e50" />
+                        <circle cx="54" cy="82" r="1" fill="#f1c40f" />
+                        <rect x="10" y="90" width="80" height="5" fill="#27ae60" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-reimagined">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="buildingGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#37474F" />
+                                <stop offset="30%" stop-color="#546E7A" />
+                                <stop offset="70%" stop-color="#546E7A" />
+                                <stop offset="100%" stop-color="#37474F" />
+                            </linearGradient>
+                            <linearGradient id="windowWarm" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FFE082" />
+                                <stop offset="100%" stop-color="#FFB300" />
+                            </linearGradient>
+                            <linearGradient id="windowCool" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#1A237E" />
+                                <stop offset="100%" stop-color="#0D47A1" />
+                            </linearGradient>
+                            <linearGradient id="spireGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" stop-color="#8B6914" />
+                                <stop offset="50%" stop-color="#C9A227" />
+                                <stop offset="100%" stop-color="#E8D48B" />
+                            </linearGradient>
+                            <filter id="buildingShadow">
+                                <feDropShadow dx="3" dy="0" stdDeviation="2" flood-color="#000" flood-opacity="0.3" />
+                            </filter>
+                            <filter id="windowGlow">
+                                <feGaussianBlur stdDeviation="1" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <!-- Art Deco Skyscraper -->
+                        <g filter="url(#buildingShadow)">
+                            <!-- Main tower -->
+                            <rect x="30" y="30" width="40" height="65" fill="url(#buildingGrad)" />
+                            <!-- Setback tier 1 -->
+                            <rect x="35" y="22" width="30" height="10" fill="#455A64" />
+                            <!-- Setback tier 2 -->
+                            <rect x="40" y="15" width="20" height="9" fill="#546E7A" />
+                            <!-- Spire -->
+                            <path d="M50 2 L46 15 L54 15 Z" fill="url(#spireGrad)" />
+                            <rect x="48" y="10" width="4" height="5" fill="url(#spireGrad)" />
+                            <!-- Art Deco crown ornaments -->
+                            <path d="M35 22 L40 18 L40 22 Z" fill="#C9A227" />
+                            <path d="M65 22 L60 18 L60 22 Z" fill="#C9A227" />
+                            <!-- Decorative vertical lines -->
+                            <rect x="38" y="30" width="1" height="65" fill="#C9A227" opacity="0.6" />
+                            <rect x="50" y="22" width="1" height="73" fill="#C9A227" opacity="0.6" />
+                            <rect x="61" y="30" width="1" height="65" fill="#C9A227" opacity="0.6" />
+                            <!-- Horizontal bands -->
+                            <rect x="30" y="45" width="40" height="2" fill="#C9A227" />
+                            <rect x="30" y="60" width="40" height="2" fill="#C9A227" />
+                            <rect x="30" y="75" width="40" height="2" fill="#C9A227" />
+                            <!-- Windows with warm glow -->
+                            <g filter="url(#windowGlow)">
+                                <!-- Row 1 -->
+                                <rect x="33" y="33" width="5" height="8" fill="url(#windowWarm)" />
+                                <rect x="42" y="33" width="5" height="8" fill="url(#windowCool)" />
+                                <rect x="53" y="33" width="5" height="8" fill="url(#windowWarm)" />
+                                <rect x="62" y="33" width="5" height="8" fill="url(#windowCool)" />
+                                <!-- Row 2 -->
+                                <rect x="33" y="48" width="5" height="8" fill="url(#windowCool)" />
+                                <rect x="42" y="48" width="5" height="8" fill="url(#windowWarm)" />
+                                <rect x="53" y="48" width="5" height="8" fill="url(#windowWarm)" />
+                                <rect x="62" y="48" width="5" height="8" fill="url(#windowCool)" />
+                                <!-- Row 3 -->
+                                <rect x="33" y="63" width="5" height="8" fill="url(#windowWarm)" />
+                                <rect x="42" y="63" width="5" height="8" fill="url(#windowCool)" />
+                                <rect x="53" y="63" width="5" height="8" fill="url(#windowCool)" />
+                                <rect x="62" y="63" width="5" height="8" fill="url(#windowWarm)" />
+                                <!-- Row 4 -->
+                                <rect x="33" y="78" width="5" height="8" fill="url(#windowCool)" />
+                                <rect x="62" y="78" width="5" height="8" fill="url(#windowWarm)" />
+                            </g>
+                            <!-- Grand entrance -->
+                            <rect x="43" y="78" width="14" height="17" fill="#1A1A1A" />
+                            <path d="M43 78 L50 72 L57 78 Z" fill="#C9A227" />
+                            <rect x="49" y="80" width="2" height="15" fill="#2D2D2D" />
+                            <!-- Door handles -->
+                            <circle cx="48" cy="88" r="0.8" fill="#C9A227" />
+                            <circle cx="52" cy="88" r="0.8" fill="#C9A227" />
+                            <!-- Upper tier windows -->
+                            <rect x="44" y="17" width="4" height="4" fill="url(#windowWarm)" />
+                            <rect x="52" y="17" width="4" height="4" fill="url(#windowCool)" />
+                            <!-- Ground -->
+                            <rect x="15" y="95" width="70" height="5" fill="#263238" />
+                            <rect x="15" y="95" width="70" height="1" fill="#37474F" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-plus">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="ecoGlass" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#E0F7FA" />
+                                <stop offset="50%" stop-color="#B2EBF2" />
+                                <stop offset="100%" stop-color="#80DEEA" />
+                            </linearGradient>
+                            <linearGradient id="greenery" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#66BB6A" />
+                                <stop offset="100%" stop-color="#2E7D32" />
+                            </linearGradient>
+                            <filter id="softGlow">
+                                <feGaussianBlur stdDeviation="1" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Main Tower Structure -->
+                        <path d="M30 95 L30 20 Q30 10 50 10 Q70 10 70 20 L70 95" fill="url(#ecoGlass)" />
+
+                        <!-- Solar Panels / Tech Lines -->
+                        <path d="M30 30 L70 30 M30 50 L70 50 M30 70 L70 70" stroke="#0097A7" stroke-width="0.5"
+                            opacity="0.5" />
+                        <path d="M40 10 L40 95 M60 10 L60 95" stroke="#0097A7" stroke-width="0.5" opacity="0.5" />
+
+                        <!-- Vertical Gardens (Hanging Plants) -->
+                        <path d="M30 35 Q25 40 30 45 Q35 40 30 35" fill="url(#greenery)" />
+                        <path d="M70 55 Q75 60 70 65 Q65 60 70 55" fill="url(#greenery)" />
+                        <path d="M30 75 Q25 80 30 85 Q35 80 30 75" fill="url(#greenery)" />
+                        <path d="M40 25 Q35 30 40 35" fill="url(#greenery)" />
+                        <path d="M60 45 Q65 50 60 55" fill="url(#greenery)" />
+
+                        <!-- Wind Turbines (Stylized) -->
+                        <g transform="translate(50, 15)">
+                            <circle cx="0" cy="0" r="2" fill="#FFF" />
+                            <path d="M0 0 L0 -8 M0 0 L7 4 M0 0 L-7 4" stroke="#FFF" stroke-width="1" />
+                        </g>
+
+                        <!-- Warm Community Lights -->
+                        <circle cx="45" cy="40" r="1.5" fill="#FFEB3B" filter="url(#softGlow)" />
+                        <circle cx="55" cy="60" r="1.5" fill="#FFEB3B" filter="url(#softGlow)" />
+                        <circle cx="45" cy="80" r="1.5" fill="#FFEB3B" filter="url(#softGlow)" />
+
+                        <!-- Base Greenery -->
+                        <path d="M15 95 Q25 85 35 95 T55 95 T75 95 T95 95" fill="url(#greenery)" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-gemini-flash">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="buildGradFlash" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#2c3e50" />
+                                <stop offset="100%" stop-color="#34495e" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="25" y="10" width="50" height="85" fill="url(#buildGradFlash)" />
+                        <rect x="20" y="90" width="60" height="5" fill="#1a1a1a" />
+                        <g fill="#f1c40f" opacity="0.8">
+                            <rect x="32" y="20" width="8" height="8" rx="1" />
+                            <rect x="46" y="35" width="8" height="8" rx="1" />
+                            <rect x="60" y="50" width="8" height="8" rx="1" />
+                            <rect x="32" y="65" width="8" height="8" rx="1" />
+                        </g>
+                        <g fill="#1a1a1a" opacity="0.5">
+                            <rect x="46" y="20" width="8" height="8" rx="1" />
+                            <rect x="60" y="20" width="8" height="8" rx="1" />
+                            <rect x="32" y="35" width="8" height="8" rx="1" />
+                            <rect x="60" y="35" width="8" height="8" rx="1" />
+                            <rect x="32" y="50" width="8" height="8" rx="1" />
+                            <rect x="46" y="50" width="8" height="8" rx="1" />
+                            <rect x="46" y="65" width="8" height="8" rx="1" />
+                            <rect x="60" y="65" width="8" height="8" rx="1" />
+                        </g>
+                        <rect x="42" y="80" width="16" height="10" fill="#111" />
+                        <line x1="50" y1="10" x2="50" y2="2" stroke="#34495e" stroke-width="1" />
+                        <circle cx="50" cy="2" r="1" fill="#e74c3c" />
+                    </svg>
+                </div>
+            </div>
+        </article>
+
+        <!-- Batman -->
+        <article class="comparison-card">
+            <div class="card-title">
+                <h2>Batman</h2>
+            </div>
+
+            <div class="svg-original">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 25 Q20 50 10 90 Q30 70 50 85 Q70 70 90 90 Q80 50 50 25" fill="#1a1a1a" />
+                        <ellipse cx="50" cy="40" rx="18" ry="20" fill="#2c3e50" />
+                        <path d="M32 35 L28 10 L38 28 Z" fill="#2c3e50" />
+                        <path d="M68 35 L72 10 L62 28 Z" fill="#2c3e50" />
+                        <path d="M32 40 Q50 55 68 40 Q65 50 50 52 Q35 50 32 40" fill="#1a1a1a" />
+                        <path d="M38 38 L42 35 L46 38 L42 40 Z" fill="#fff" />
+                        <path d="M54 38 L58 35 L62 38 L58 40 Z" fill="#fff" />
+                        <path d="M50 42 L48 46 L52 46 Z" fill="#1a1a1a" />
+                        <path d="M44 50 Q50 53 56 50" stroke="#1a1a1a" stroke-width="1" fill="none" />
+                        <ellipse cx="50" cy="70" rx="12" ry="8" fill="#f1c40f" />
+                        <path d="M42 70 Q45 65 50 68 Q55 65 58 70 Q55 73 50 71 Q45 73 42 70" fill="#1a1a1a" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-reimagined">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="capeGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                                <stop offset="0%" stop-color="#1A1A1A" />
+                                <stop offset="100%" stop-color="#0D0D0D" />
+                            </linearGradient>
+                            <linearGradient id="cowlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#2D2D2D" />
+                                <stop offset="50%" stop-color="#1A1A1A" />
+                                <stop offset="100%" stop-color="#0D0D0D" />
+                            </linearGradient>
+                            <linearGradient id="batSymbolGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#E8D48B" />
+                                <stop offset="50%" stop-color="#C9A227" />
+                                <stop offset="100%" stop-color="#8B6914" />
+                            </linearGradient>
+                            <filter id="batShadow">
+                                <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.6" />
+                            </filter>
+                            <filter id="eyeGlow">
+                                <feGaussianBlur stdDeviation="1.5" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                            <clipPath id="capeClip">
+                                <path d="M50 20 Q15 50 5 95 Q30 75 50 90 Q70 75 95 95 Q85 50 50 20" />
+                            </clipPath>
+                        </defs>
+                        <g filter="url(#batShadow)">
+                            <!-- Dramatic cape with scalloped edges -->
+                            <path
+                                d="M50 22 Q15 52 5 98 Q18 85 28 92 Q38 82 50 92 Q62 82 72 92 Q82 85 95 98 Q85 52 50 22"
+                                fill="url(#capeGrad)" />
+                            <!-- Cape inner folds -->
+                            <path d="M50 22 Q35 50 30 75" stroke="#2D2D2D" stroke-width="1" fill="none" opacity="0.5" />
+                            <path d="M50 22 Q65 50 70 75" stroke="#2D2D2D" stroke-width="1" fill="none" opacity="0.5" />
+                            <!-- Cowl -->
+                            <ellipse cx="50" cy="42" rx="20" ry="22" fill="url(#cowlGrad)" />
+                            <!-- Iconic ears -->
+                            <path d="M30 38 L24 5 L40 30 Z" fill="url(#cowlGrad)" />
+                            <path d="M70 38 L76 5 L60 30 Z" fill="url(#cowlGrad)" />
+                            <!-- Ear highlights -->
+                            <path d="M28 25 L32 32" stroke="#3D3D3D" stroke-width="1.5" />
+                            <path d="M72 25 L68 32" stroke="#3D3D3D" stroke-width="1.5" />
+                            <!-- Mask -->
+                            <path d="M30 42 Q50 60 70 42 Q67 54 50 56 Q33 54 30 42" fill="#0D0D0D" />
+                            <!-- White eyes with glow -->
+                            <g filter="url(#eyeGlow)">
+                                <path d="M36 40 L42 36 L48 40 L42 44 Z" fill="#FFF" />
+                                <path d="M52 40 L58 36 L64 40 L58 44 Z" fill="#FFF" />
+                            </g>
+                            <!-- Nose shadow -->
+                            <path d="M50 46 L47 52 L53 52 Z" fill="#0D0D0D" />
+                            <!-- Stern mouth line -->
+                            <path d="M43 54 L50 56 L57 54" stroke="#0D0D0D" stroke-width="1.5" fill="none"
+                                stroke-linecap="round" />
+                            <!-- Jaw line -->
+                            <path d="M35 50 Q50 65 65 50" stroke="#1A1A1A" stroke-width="0.5" fill="none" />
+                            <!-- Bat symbol chest plate -->
+                            <ellipse cx="50" cy="75" rx="15" ry="10" fill="url(#batSymbolGrad)" />
+                            <ellipse cx="50" cy="75" rx="13" ry="8" fill="none" stroke="#8B6914" stroke-width="0.5" />
+                            <!-- Detailed bat symbol -->
+                            <path d="M38 75
+                                     Q40 70 44 72
+                                     Q47 68 50 71
+                                     Q53 68 56 72
+                                     Q60 70 62 75
+                                     Q60 73 58 75
+                                     Q56 78 54 76
+                                     Q52 80 50 77
+                                     Q48 80 46 76
+                                     Q44 78 42 75
+                                     Q40 73 38 75" fill="#0D0D0D" />
+                            <!-- Utility belt hint -->
+                            <rect x="38" y="86" width="24" height="3" fill="#C9A227" rx="1" />
+                            <rect x="42" y="86" width="4" height="3" fill="#8B6914" />
+                            <rect x="48" y="86" width="4" height="3" fill="#8B6914" />
+                            <rect x="54" y="86" width="4" height="3" fill="#8B6914" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-opus-plus">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="nightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#0D47A1" />
+                                <stop offset="100%" stop-color="#000000" />
+                            </linearGradient>
+                            <filter id="rainBlur">
+                                <feGaussianBlur stdDeviation="0.5, 2" />
+                            </filter>
+                            <filter id="moonGlow">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Background -->
+                        <rect width="100" height="100" fill="url(#nightSky)" />
+
+                        <!-- Moon -->
+                        <circle cx="80" cy="20" r="12" fill="#E0E0E0" opacity="0.8" filter="url(#moonGlow)" />
+
+                        <!-- Rain -->
+                        <g stroke="#FFF" stroke-width="0.5" opacity="0.3" filter="url(#rainBlur)">
+                            <line x1="10" y1="10" x2="5" y2="25" />
+                            <line x1="30" y1="5" x2="25" y2="20" />
+                            <line x1="50" y1="15" x2="45" y2="30" />
+                            <line x1="70" y1="10" x2="65" y2="25" />
+                            <line x1="90" y1="20" x2="85" y2="35" />
+                            <line x1="20" y1="40" x2="15" y2="55" />
+                            <line x1="60" y1="50" x2="55" y2="65" />
+                        </g>
+
+                        <!-- Gargoyle Base -->
+                        <path d="M20 100 L20 80 Q10 80 5 85 L5 100" fill="#424242" />
+                        <path d="M20 80 Q30 75 40 80 L45 85 L40 90 L20 100" fill="#616161" />
+
+                        <!-- Cape -->
+                        <path d="M40 55 Q60 40 85 50 Q95 60 90 85 Q70 95 50 85 Q45 75 40 55" fill="#000" />
+
+                        <!-- Body Silhouette -->
+                        <path d="M35 60 Q40 50 45 45 Q50 40 55 45 Q60 50 55 60 L50 75 L40 75 Z" fill="#000" />
+
+                        <!-- Cowl Ears -->
+                        <path d="M45 45 L42 35 L48 42 Z" fill="#000" />
+                        <path d="M55 45 L58 35 L52 42 Z" fill="#000" />
+
+                        <!-- Eyes -->
+                        <path d="M46 48 L50 50 L48 52 Z" fill="#FFF" filter="url(#moonGlow)" />
+                        <path d="M54 48 L50 50 L52 52 Z" fill="#FFF" filter="url(#moonGlow)" />
+
+                        <!-- Arm/Gauntlet highlights -->
+                        <path d="M35 60 L30 65" stroke="#424242" stroke-width="1" />
+                        <path d="M32 62 L28 66" stroke="#424242" stroke-width="1" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="svg-gemini-flash">
+                <div class="svg-container">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="batGlowFlash" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#444" />
+                                <stop offset="100%" stop-color="#000" />
+                            </radialGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="45" fill="#111" stroke="#7c4dff" stroke-width="0.5" />
+                        <path
+                            d="M50 35 C 55 30, 65 30, 75 35 C 85 30, 95 35, 90 55 C 80 65, 65 75, 50 70 C 35 75, 20 65, 10 55 C 5 35, 15 30, 25 35 C 35 30, 45 30, 50 35"
+                            fill="url(#batGlowFlash)" stroke="#000" stroke-width="1" />
+                        <path d="M47 36 L48 30 L50 34 L52 30 L53 36" fill="#000" />
+                    </svg>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>Crafted with <span>precision</span> — Art Deco meets Neo-Brutalism</p>
+    </footer>
+</body>
+
+</html>
